@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    style="background-color: #D11D27"
+    :class="{'red': !$vuetify.theme.dark}"
     :value="true"
     app
     dark
@@ -47,6 +47,7 @@ export default {
           title: 'Home',
           to: '/'
         },
+        { icon: 'mdi-account-key', title: 'Auth', to: '/auth'},
         {
           icon: 'mdi-bank',
           title: 'Bank',
@@ -58,11 +59,9 @@ export default {
           to: '/staking'
         },
         { icon: 'mdi-vote', title: 'Governance', to: '/governance' },
-        {
-          icon: 'mdi-logout',
-          title: 'Logout',
-          to: '/logout'
-        }
+        { icon: 'mdi-alert-decagram', title: 'Crisis', to: '/crisis' },
+        { icon: 'mdi-diamond-stone', title: 'Distribution', to: '/distribution' },
+        { icon: 'mdi-close-octagon', title: 'Slashing', to: '/slashing' },
       ]
     }
   }
@@ -70,6 +69,8 @@ export default {
 </script>
 
 <style lang="sass">
+.red
+  background-color: #D11D27
 #sidebar
   .v-list .v-list-item--active .v-icon
     color: #E53935

@@ -10,7 +10,7 @@
       <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
     </v-app-bar>
     <h1 v-else class="mb-8">{{ title }}</h1>
-    <v-card>
+    <v-card class="mb-8">
       <v-container>
         <v-row>
           <v-col cols="12" md="7">
@@ -33,6 +33,9 @@
           </v-col>
         </v-row>
       </v-container>
+    </v-card>
+    <v-card>
+      <v-card-title>Last 10 Transactions</v-card-title>
     </v-card>
   </page-template>
 </template>

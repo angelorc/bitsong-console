@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
     <sidebar v-if="$vuetify.breakpoint.mdAndUp" />
-    <toolbar v-if="false" />
     <v-main>
+      <toolbar />
       <nuxt />
     </v-main>
     <mobile-toolbar v-if="$vuetify.breakpoint.smAndDown"></mobile-toolbar>

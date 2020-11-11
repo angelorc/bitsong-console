@@ -8,7 +8,7 @@
       </template>
 
       <v-card width="300">
-        <v-list color="primary">
+        <v-list style="background-color: #D11D27">
           <v-list-item two-line>
             <v-list-item-avatar>
               <Jdenticon :address="address" />
@@ -109,21 +109,6 @@ export default {
     items() {
       return [
         {
-          icon: 'mdi-account',
-          title: 'My channel',
-          to: `/channel/${this.address}`
-        },
-        {
-          icon: 'mdi-wallet',
-          title: 'Wallet',
-          to: '/wallet'
-        },
-        {
-          icon: 'mdi-music-circle',
-          title: 'BitSong Studio',
-          to: '/studio'
-        },
-        {
           icon: 'mdi-exit-to-app',
           title: 'Log out',
           to: '/wallet/logout'
@@ -131,7 +116,7 @@ export default {
       ]
     },
     address() {
-      return `bitsong1pdfr7xuckj6lhdphdde6peres9ufwgpsxge8yc`
+      return this.$store.getters[`wallet/address`]
     }
   }
 }

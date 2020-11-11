@@ -10,9 +10,9 @@
       <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
     </v-app-bar>
     <h1 v-else class="mb-8">{{ title }}</h1>
-    <v-card class="mb-8">
-      <v-card-title>Send Coins</v-card-title>
-      <v-card-subtitle>Transfer your coins to your friends.</v-card-subtitle>
+    <v-card class="mb-12">
+      <v-card-title>Unjail</v-card-title>
+      <v-card-subtitle>Unjail validator previously jailed for downtime.</v-card-subtitle>
       <v-divider></v-divider>
       <v-container>
         <v-row>
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      title: `Bank`
+      title: `Slashing`
     }
   }
 }
