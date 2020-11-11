@@ -1,36 +1,31 @@
 <template>
   <v-navigation-drawer
-    :class="{'red': !$vuetify.theme.dark}"
+    :class="{'color': !$vuetify.theme.dark}"
     :value="true"
     app
-    dark
-    clipped
     fixed
     stateless
-    floating
     id="sidebar"
   >
     <v-container>
       <v-row no-gutters>
         <v-col>
-          <img src="/bitsong_logo.svg" height="38" class="pt-1" />
+          <img :src="logo" height="38" class="pt-1" />
         </v-col>
       </v-row>
     </v-container>
-    <v-divider></v-divider>
-    <v-list>
+    <v-list rounded>
       <v-list-item
         v-for="(item, i) in items"
         :key="i"
         :to="item.to"
         router
-        class="pl-7"
-      >
+        >
         <v-list-item-action>
-          <v-icon color="white">{{ item.icon }}</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
+          <v-list-item-title :class="{'font-weight-medium': $vuetify.theme.dark}" v-text="item.title" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -40,6 +35,9 @@
 <script>
 export default {
   computed: {
+    logo() {
+      return this.$vuetify.theme.dark ? `/bitsong_logo.svg` : `/bitsong_logo_red.svg`
+    },
     items() {
       return [
         {
@@ -68,10 +66,10 @@ export default {
 }
 </script>
 
-<style lang="sass">
-.red
-  background-color: #D11D27
+<style lang="sass" scoped>
 #sidebar
   .v-list .v-list-item--active .v-icon
     color: #E53935
+  &.color
+    background-color: #fafafa
 </style>
