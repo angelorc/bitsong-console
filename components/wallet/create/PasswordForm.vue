@@ -20,7 +20,7 @@
       <v-text-field
         outlined
         ref="password_confirmation"
-        label="Conferma Password"
+        label="Confirm Password"
         v-model="confirm_password"
         :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show_password ? 'text' : 'password'"
@@ -31,7 +31,7 @@
       ></v-text-field>
       <v-checkbox
         v-model="agreement"
-        label="I understand that BitSong not save any of password, seed phrase, keystore or private key"
+        label="I understand that BitSong will not store my password, my seed phrase, my keystore nor my private key"
         class="mt-0 pt-0"
       ></v-checkbox>
     </v-card-text>
