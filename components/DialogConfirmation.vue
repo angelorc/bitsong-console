@@ -138,13 +138,13 @@ export default {
     },
     memo: String,
     gas_price: {
-      type: String,
+      type: [String, Number],
       default() {
         return this.$store.getters['app/gas_price']
       }
     },
     gas_limit: {
-      type: String,
+      type: [String, Number],
       default() {
         return this.$store.getters['app/gas_limit']
       }

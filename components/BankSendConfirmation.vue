@@ -46,8 +46,8 @@ export default {
     amount: String,
     coin: String,
     memo: String,
-    gas_price: String,
-    gas_limit: String,
+    gas_price: [String, Number],
+    gas_limit: [String, Number],
     response: {
       type: Object,
       default() {

@@ -12,40 +12,24 @@
   >
     <template v-slot:fields>
       <v-col cols="12" md="6">
-        <v-text-field
+        <input-address
           v-model="form.to_address"
-          label="To address"
-          :hint="`es: ${address}`"
-          required
-          clearable
-          v-validate="rulesRecipient"
-          data-vv-name="recipient"
-          :error-messages="errors.collect('recipient')"
-        ></v-text-field>
+          v-on:update:address="form.to_address = $event"
+        ></input-address>
       </v-col>
+
       <v-col cols="6" md="3">
-        <v-autocomplete
+        <input-coin
           v-model="form.coin"
-          required
-          label="Coin"
-          :items="coins"
-          item-text="text"
-          item-value="denom"
-        ></v-autocomplete>
+          v-on:update:coin="form.coin = $event"
+        ></input-coin>
       </v-col>
       <v-col cols="6" md="3">
-        <v-text-field
+        <input-amount
           v-model="form.amount"
-          autocomplete="off"
-          placeholder="Amount"
-          :hint="balanceText"
-          type="number"
-          required
-          :suffix="convertMicroDenom(form.coin)"
-          v-validate="'decimal:6'"
-          data-vv-name="amount"
-          :error-messages="errors.collect('amount')"
-        ></v-text-field>
+          :coin="form.coin"
+          v-on:update:amount="form.amount = $event"
+        ></input-amount>
       </v-col>
     </template>
 
@@ -77,7 +61,6 @@
 import {
   convertMacroToMicroAmount,
   convertMicroToMacroAmount,
-  convertMicroDenom,
   parseErrorResponse
 } from '@/lib/utils'
 
@@ -85,9 +68,7 @@ export default {
   data: () => ({
     loading: false,
     loadingModal: false,
-    coins: [],
-    balance: [],
-    advanced: false,
+
     showModal: false,
     response: {
       success: false,
@@ -103,11 +84,12 @@ export default {
       gas_limit: 0
     }
   }),
+
   created() {
-    this.getAccount()
     this.form.gas_price = this.$store.getters['app/gas_price']
     this.form.gas_limit = this.$store.getters['app/gas_limit']
   },
+
   computed: {
     canContinue() {
       return (
@@ -119,91 +101,11 @@ export default {
     address() {
       return this.$store.getters[`wallet/address`]
     },
-    micro_stake_denom() {
-      return this.$store.getters['app/micro_stake_denom']
-    },
-    stake_denom() {
-      return this.$store.getters['app/stake_denom']
-    },
-    address_prefix() {
-      return this.$store.getters['app/address_prefix']
-    },
-    address_length() {
-      return this.$store.getters['app/address_length']
-    },
     decimals() {
       return this.$store.getters['app/decimals']
-    },
-    rulesRecipient() {
-      return {
-        required: true,
-        regex: /^bitsong1/,
-        max: this.address_length,
-        min: this.address_length
-      }
-    },
-    balanceText() {
-      if (this.balance.length === 0) return `Max: 0 ${this.stake_denom}`
-
-      let coin
-      if (this.form.coin === null) {
-        coin = this.balance.find(
-          c => c.text.toUpperCase() === this.micro_stake_denom
-        )
-        if (coin === undefined) return `Max: 0 ${this.stake_denom}`
-        return `Max: ${convertMicroToMacroAmount(coin.amount, this.decimals)} ${
-          this.stake_denom
-        }`
-      }
-
-      coin = this.balance.find(
-        c => c.denom.toUpperCase() === this.form.coin.toUpperCase()
-      )
-
-      if (coin === undefined)
-        return `Max: 0 ${convertMicroDenom(this.form.coin)}`
-      return `Max: ${convertMicroToMacroAmount(
-        coin.amount,
-        this.decimals
-      )}${convertMicroDenom(coin.denom)}`
     }
   },
   methods: {
-    convertMicroDenom(denom) {
-      return convertMicroDenom(denom)
-    },
-    async getAccount() {
-      try {
-        this.loading = true
-        const account = await this.$btsg.getAccount(this.address)
-
-        if (account.value && account.value.coins) {
-          this.coins = account.value.coins.map(c => {
-            if (c.denom.toUpperCase() === this.micro_stake_denom) {
-              return {
-                denom: this.micro_stake_denom,
-                text: this.stake_denom
-              }
-            }
-
-            return {
-              denom: c.denom.toUpperCase(),
-              text: convertMicroDenom(c.denom)
-            }
-          })
-          this.balance = account.value.coins.map(c => {
-            return {
-              ...c,
-              text: convertMicroDenom(c.denom)
-            }
-          })
-        }
-
-        this.loading = false
-      } catch (e) {
-        console.error(e)
-      }
-    },
     onSend() {
       this.showModal = true
     },
