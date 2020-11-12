@@ -10,29 +10,7 @@
       <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
     </v-app-bar>
     <h1 v-else class="mb-8">{{ title }}</h1>
-    <v-card class="mb-8">
-      <v-card-title>Send Coins</v-card-title>
-      <v-card-subtitle>Transfer your coins to your friends.</v-card-subtitle>
-      <v-divider></v-divider>
-      <v-container>
-        <v-row>
-          <v-col cols="6">
-            <v-text-field label="Address"></v-text-field>
-          </v-col>
-          <v-col cols="3">
-            <v-text-field label="Coin"></v-text-field>
-          </v-col>
-          <v-col cols="3">
-            <v-text-field label="Amount"></v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
-      <v-card-actions>
-        <v-btn text small>Advanced Mode</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn color="primary">Send</v-btn>
-      </v-card-actions>
-    </v-card>
+    <bank-send></bank-send>
   </page-template>
 </template>
 
