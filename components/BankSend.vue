@@ -256,6 +256,10 @@ export default {
       this.resetResponse()
       this.loadingModal = true
 
+      console.log(this.address)
+      console.log(this.form)
+      console.log(this.decimals)
+
       const payload = {
         from_address: this.address,
         to_address: this.form.to_address,
@@ -268,6 +272,8 @@ export default {
           }
         ]
       }
+
+      console.log(payload)
 
       const response = await this.$bitsong.send(
         payload,
