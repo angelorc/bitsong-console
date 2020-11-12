@@ -1,0 +1,76 @@
+<template>
+  <dialog-confirmation
+    title="Send Coins"
+    :loading="loading"
+    :memo="memo"
+    :gas_price="gas_price"
+    :gas_limit="gas_limit"
+    :response="response"
+    v-on:cancel="$emit('cancel')"
+    v-on:confirm="$emit('confirm')"
+  >
+    <template v-slot:fields>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>{{ to_address }}</v-list-item-title>
+          <v-list-item-subtitle>To address</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>
+            <amount
+              :micro-amount="convertMacroToMicroAmount(amount, decimals)"
+              :denom="convertMicroDenom(coin)"
+            />
+          </v-list-item-title>
+          <v-list-item-subtitle>Amount</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
+  </dialog-confirmation>
+</template>
+
+<script>
+import { convertMicroDenom, convertMacroToMicroAmount } from '@/lib/utils'
+
+export default {
+  props: {
+    loading: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    },
+    to_address: String,
+    amount: String,
+    coin: String,
+    memo: String,
+    gas_price: String,
+    gas_limit: String,
+    response: {
+      type: Object,
+      default() {
+        return {
+          success: false,
+          log: null,
+          tx_hash: null
+        }
+      }
+    }
+  },
+  methods: {
+    convertMacroToMicroAmount(amt) {
+      return convertMacroToMicroAmount(amt, this.decimals)
+    },
+    convertMicroDenom(denom) {
+      return convertMicroDenom(denom)
+    }
+  },
+  computed: {
+    decimals() {
+      return this.$store.getters['app/decimals']
+    }
+  }
+}
+</script>

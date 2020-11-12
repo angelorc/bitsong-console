@@ -1,113 +1,76 @@
 <template>
-  <v-card class="mb-8" :loading="loading" :disabled="loading">
-    <v-card-title>Send Coins</v-card-title>
-    <v-card-subtitle>Transfer your coins to your friends.</v-card-subtitle>
-    <v-divider></v-divider>
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-text-field
-            v-model="form.to_address"
-            label="To address"
-            :hint="`es: ${address}`"
-            required
-            clearable
-            v-validate="rulesRecipient"
-            data-vv-name="recipient"
-            :error-messages="errors.collect('recipient')"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6" md="3">
-          <v-autocomplete
-            v-model="form.coin"
-            required
-            label="Coin"
-            :items="coins"
-            item-text="text"
-            item-value="denom"
-          ></v-autocomplete>
-        </v-col>
-        <v-col cols="6" md="3">
-          <v-text-field
-            v-model="form.amount"
-            autocomplete="off"
-            placeholder="Amount"
-            :hint="balanceText"
-            type="number"
-            required
-            :suffix="convertMicroDenom(form.coin)"
-            v-validate="'decimal:6'"
-            data-vv-name="amount"
-            :error-messages="errors.collect('amount')"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row v-if="advanced">
-        <v-col cols="12" md="6">
-          <v-text-field
-            v-model="form.memo"
-            label="Memo (optional)"
-            counter="100"
-            v-validate="'max:100'"
-            data-vv-name="memo"
-            :error-messages="errors.collect('memo')"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6" md="3">
-          <v-text-field
-            v-model="form.gas_limit"
-            label="Gas Limit"
-            type="number"
-            required
-            data-vv-name="gas_limit"
-            v-validate="'integer|min_value:0|max_value:2000000'"
-            :error-messages="errors.collect('gas_limit')"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6" md="3">
-          <v-text-field
-            v-model="form.gas_price"
-            label="Gas Price"
-            type="number"
-            :suffix="$store.getters[`app/micro_stake_denom`].toLowerCase()"
-            required
-            v-validate="'decimal:8|min_value:0'"
-            data-vv-name="gas_price"
-            :error-messages="errors.collect('gas_price')"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-card-actions>
-      <v-switch
-        v-model="advanced"
-        label="ADVANCED"
-        class="ml-2 font-weight-bold"
-      ></v-switch>
-      <v-spacer></v-spacer>
-      <v-btn
-        :disabled="
-          form.to_address === '' && form.coin === null && form.amount === ''
-        "
-        color="primary"
-        @click.stop="onSend"
-        >Send</v-btn
-      >
-    </v-card-actions>
-    <bank-send-dialog
-      v-if="showModal"
-      :to_address="form.to_address"
-      :amount="form.amount"
-      :coin="form.coin"
-      :memo="form.memo"
-      :gas_price="form.gas_price"
-      :gas_limit="form.gas_limit"
-      :loading="loadingModal"
-      :response="response"
-      v-on:cancel="onCancel"
-      v-on:confirm="onConfirm"
-    ></bank-send-dialog>
-  </v-card>
+  <card-msg
+    title="Send Coins"
+    subtitle="Transfer your coins to your friends."
+    :loading="loading"
+    :memo="form.memo"
+    :gas_price="form.gas_price"
+    :gas_limit="form.gas_limit"
+    v-on:update:memo="form.memo = $event"
+    v-on:update:gas_price="form.gas_price = $event"
+    v-on:update:gas_limit="form.gas_limit = $event"
+  >
+    <template v-slot:fields>
+      <v-col cols="12" md="6">
+        <v-text-field
+          v-model="form.to_address"
+          label="To address"
+          :hint="`es: ${address}`"
+          required
+          clearable
+          v-validate="rulesRecipient"
+          data-vv-name="recipient"
+          :error-messages="errors.collect('recipient')"
+        ></v-text-field>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-autocomplete
+          v-model="form.coin"
+          required
+          label="Coin"
+          :items="coins"
+          item-text="text"
+          item-value="denom"
+        ></v-autocomplete>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-text-field
+          v-model="form.amount"
+          autocomplete="off"
+          placeholder="Amount"
+          :hint="balanceText"
+          type="number"
+          required
+          :suffix="convertMicroDenom(form.coin)"
+          v-validate="'decimal:6'"
+          data-vv-name="amount"
+          :error-messages="errors.collect('amount')"
+        ></v-text-field>
+      </v-col>
+    </template>
+
+    <template v-slot:actions>
+      <v-btn :disabled="canContinue" color="primary" @click.stop="onSend">
+        Send
+      </v-btn>
+    </template>
+
+    <template v-slot:dialog>
+      <bank-send-confirmation
+        v-if="showModal"
+        :to_address="form.to_address"
+        :amount="form.amount"
+        :coin="form.coin"
+        :memo="form.memo"
+        :gas_price="form.gas_price"
+        :gas_limit="form.gas_limit"
+        :loading="loadingModal"
+        :response="response"
+        v-on:cancel="onCancel"
+        v-on:confirm="onConfirm"
+      ></bank-send-confirmation>
+    </template>
+  </card-msg>
 </template>
 
 <script>
@@ -146,6 +109,13 @@ export default {
     this.form.gas_limit = this.$store.getters['app/gas_limit']
   },
   computed: {
+    canContinue() {
+      return (
+        this.form.to_address === '' &&
+        this.form.coin === null &&
+        this.form.amount === ''
+      )
+    },
     address() {
       return this.$store.getters[`wallet/address`]
     },
@@ -235,11 +205,7 @@ export default {
       }
     },
     onSend() {
-      try {
-        this.showModal = true
-      } catch (e) {
-        console.error(e)
-      }
+      this.showModal = true
     },
     onCancel() {
       this.showModal = false
