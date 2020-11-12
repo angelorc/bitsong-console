@@ -115,7 +115,7 @@ import {
   convertMacroToMicroAmount,
   convertMicroToMacroAmount,
   convertMicroDenom,
-  parserErrorResponse
+  parseErrorResponse
 } from '@/lib/utils'
 
 export default {
@@ -278,7 +278,7 @@ export default {
         this.form.gas_limit
       )
 
-      this.response = parserErrorResponse(response)
+      this.response = parseErrorResponse(response)
       this.loadingModal = false
     }
   }
