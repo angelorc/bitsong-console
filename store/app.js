@@ -1,96 +1,51 @@
 export const state = () => ({
-  connected: false,
-  last_block: 0,
-  total_supply: 0,
-  community_pool: 0,
-  inflation: 0,
-  chain_id: '',
-  signatures: {
-    active: 0,
-    total: 0
-  },
-  stakeDenom: 'ubtsg'
+  chain_id: process.env.CHAIN_ID,
+  micro_stake_denom: process.env.MICROSTAKEDENOM,
+  stake_denom: process.env.STAKEDENOM,
+  dark_theme: false,
+  gas_price: process.env.DEFAULT_GAS_PRICE,
+  gas_limit: process.env.DEFAULT_GAS_LIMIT,
+  address_prefix: process.env.ADDRESS_PREFIX,
+  address_length: process.env.ADDRESS_LENGTH,
+  decimals: process.env.DECIMALS
 })
 
 export const getters = {
-  last_block: state => {
-    return state.last_block
-  },
   chain_id: state => {
-    return state.chain_id
+    return state.chain_id.toLowerCase()
   },
-  isConnected: state => {
-    return state.connected
+  stake_denom: state => {
+    return state.stake_denom.toUpperCase()
   },
-  total_supply: state => {
-    return state.total_supply
+  micro_stake_denom: state => {
+    return state.micro_stake_denom.toUpperCase()
   },
-  community_pool: state => {
-    return state.community_pool
+  gas_price: state => {
+    return state.gas_price
   },
-  inflation: state => {
-    return state.inflation
+  gas_limit: state => {
+    return state.gas_limit
   },
-  signatures: state => {
-    return state.signatures
+  address_prefix: state => {
+    return `${state.address_prefix}`
   },
-  stakeDenom: state => {
-    return state.stakeDenom
+  address_length: state => {
+    return state.address_length
+  },
+  decimals: state => {
+    return state.decimals
   }
 }
 
 export const mutations = {
-  setHeaders: (state, headers) => {
-
-    state.connected = true
-    state.chain_id = headers.value.block.header.chain_id
-    state.last_block = headers.value.block.header.height
-
-    const signatures = headers.value.block.last_commit.signatures
-    const signatureslen = signatures.length
-    const signaturesNull = signatures.filter(s => s.signature === null).length
-    state.signatures.total = signatureslen
-    state.signatures.active = signatureslen - signaturesNull
+  SET_DARK_THEME: (state, payload) => {
+    state.dark_theme = payload
   },
-  setTotalSupply: (state, supply) => {
-    state.total_supply = supply
-  },
-  setCommunityPool: (state, total) => {
-    state.community_pool = total
-  },
-  setInflation: (state, inflation) => {
-    state.inflation = inflation
-  }
 }
 
 
 export const actions = {
-  startListening({ commit }) {
-    this.$tm.subscribe(
-      {
-        query: `tm.event = 'NewBlock'`,
-      },
-      async (response) => {
-        commit('setHeaders', response.data)
-
-        const supply = await this.$btsg.getTotalSupply()
-        commit('setTotalSupply', supply.result[0].amount)
-
-        const cp = await this.$btsg.getCommunityPool()
-        commit('setCommunityPool', cp.result[0].amount)
-
-        const inflation = await this.$btsg.getInflation()
-        commit('setInflation', inflation.result)
-      }
-    )
-
-    // this.$tm.subscribe(
-    //   {
-    //     query: `tm.event = 'Vote'`,
-    //   },
-    //   async (response) => {
-    //     console.log(response)
-    //   }
-    // )
+  toggleDarkTheme({ commit, state }) {
+    commit('SET_DARK_THEME', !state.dark_theme)
   }
 }

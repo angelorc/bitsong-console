@@ -1,4 +1,4 @@
-import { wait } from '@/lib/utils'
+import { sleep } from '@/lib/utils'
 import Wallet from '@/lib/wallet'
 const wallet = new Wallet()
 
@@ -55,7 +55,7 @@ export const actions = {
   }, password) {
     try {
       commit(`toggleLoading`)
-      await wait(200)
+      await sleep(200)
 
       const { address, mnemonic, privateKey } = await wallet.createAccountWithMnemonic()
       commit(`addWallet`, {
@@ -77,7 +77,7 @@ export const actions = {
   }) {
     try {
       commit(`toggleLoading`)
-      await wait(200)
+      await sleep(200)
 
       await wallet.generateAndDownloadKeyStore(getters.privateKey, getters.password)
 
@@ -94,7 +94,7 @@ export const actions = {
   }) {
     try {
       commit(`toggleLoading`)
-      await wait(200)
+      await sleep(200)
 
       const { address } = await wallet.recoverAccountFromPrivateKey(privateKey)
       commit(`addWallet`, {
@@ -120,7 +120,7 @@ export const actions = {
   }) {
     try {
       commit(`toggleLoading`)
-      await wait(200)
+      await sleep(200)
 
       const {
         privateKey,
@@ -150,7 +150,7 @@ export const actions = {
   }) {
     try {
       commit(`toggleLoading`)
-      await wait(200)
+      await sleep(200)
 
       const {
         privateKey,

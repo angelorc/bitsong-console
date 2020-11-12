@@ -52,8 +52,8 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-switch
-                v-model="$vuetify.theme.dark"
-                @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+                v-model="$store.getters['app/dark_theme']"
+                @click="$store.dispatch('app/toggleDarkTheme')"
               ></v-switch>
             </v-list-item-action>
           </v-list-item>
