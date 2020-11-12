@@ -92,6 +92,25 @@ export default {
     '@nuxtjs/dotenv'
   ],
 
+  manifest: {
+    name: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong (BTSG) Blockchain Console`,
+    short_name: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Console`,
+    theme_color: "#0e1837",
+    description: process.env.SEO_DESCRIPTION ? process.env.SEO_DESCRIPTION : `BitSong Console allows you to interact with the BitSing blockchain in a simple and immediate way. Try the bank, staking, governane, auth and crisis`,
+    background_color: "#e6e9ee",
+    display: "standalone",
+    Scope: "/",
+    start_url: "/",
+    icons: [
+      {
+        "src": "/favicon.png",
+        "type": "image/png",
+        "sizes": "32x32"
+      },
+    ],
+    splash_pages: null
+  },
+
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios

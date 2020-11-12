@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
-    <sidebar v-if="$vuetify.breakpoint.mdAndUp" />
+    <sidebar />
     <v-main>
       <toolbar v-if="$vuetify.breakpoint.mdAndUp" />
       <nuxt />
     </v-main>
-    <mobile-toolbar v-if="$vuetify.breakpoint.smAndDown"></mobile-toolbar>
+    <mobile-toolbar v-if="false"></mobile-toolbar>
     <app-footer v-if="false"></app-footer>
   </v-app>
 </template>
@@ -19,8 +19,8 @@ export default {
   components: {
     Toolbar,
     MobileToolbar,
-    AppFooter,
-  },
+    AppFooter
+  }
 }
 </script>
 

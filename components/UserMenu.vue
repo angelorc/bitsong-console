@@ -58,7 +58,7 @@
               ></v-switch>
             </v-list-item-action>
           </v-list-item>
-          <v-list-item @click>
+          <v-list-item @click v-if="false">
             <v-list-item-action>
               <v-icon color="grey darken-1">mdi-translate</v-icon>
             </v-list-item-action>
@@ -70,19 +70,19 @@
               <v-icon color="grey darken-1">mdi-chevron-right</v-icon>
             </v-list-item-action>
           </v-list-item>
-          <v-list-item to="#" router exact>
+          <v-list-item v-if="false" to="#" router exact>
             <v-list-item-action>
               <v-icon color="grey darken-1">mdi-cog</v-icon>
             </v-list-item-action>
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item>
-          <v-list-item to="#" router exact>
+          <v-list-item to="#" router exact v-if="false">
             <v-list-item-action>
               <v-icon color="grey darken-1">mdi-help-circle</v-icon>
             </v-list-item-action>
             <v-list-item-title>Help</v-list-item-title>
           </v-list-item>
-          <v-list-item to="#" router exact>
+          <v-list-item to="#" router exact v-if="false">
             <v-list-item-action>
               <v-icon color="grey darken-1">mdi-message-alert</v-icon>
             </v-list-item-action>

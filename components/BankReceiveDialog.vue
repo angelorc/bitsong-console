@@ -1,5 +1,10 @@
 <template>
-  <confirm-dialog>
+  <v-dialog
+    :fullscreen="$vuetify.breakpoint.smAndDown"
+    persistent
+    max-width="400"
+    :value="true"
+  >
     <v-card>
       <v-toolbar flat>
         <v-toolbar-title>Your address</v-toolbar-title>
@@ -22,7 +27,7 @@
         <v-btn text @click="$emit('close')">Close</v-btn>
       </v-card-actions>
     </v-card>
-  </confirm-dialog>
+  </v-dialog>
 </template>
 
 <script>

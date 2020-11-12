@@ -172,4 +172,13 @@ export const actions = {
       return false
     }
   },
+  async disconnect({
+    commit
+  }) {
+    try {
+      commit(`disconnect`)
+    } catch (e) {
+      console.error(e)
+    }
+  },
 }

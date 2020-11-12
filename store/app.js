@@ -2,13 +2,14 @@ export const state = () => ({
   chain_id: process.env.CHAIN_ID,
   micro_stake_denom: process.env.MICROSTAKEDENOM,
   stake_denom: process.env.STAKEDENOM,
-  dark_theme: false,
   gas_price: process.env.DEFAULT_GAS_PRICE, // TODO: try long response
   gas_limit: process.env.DEFAULT_GAS_LIMIT,
   address_prefix: process.env.ADDRESS_PREFIX,
   address_length: process.env.ADDRESS_LENGTH,
   decimals: process.env.DECIMALS,
-  explorer_url: process.env.EXPLORER_URL
+  explorer_url: process.env.EXPLORER_URL,
+  dark_theme: false,
+  sidebar: false
 })
 
 export const getters = {
@@ -35,12 +36,18 @@ export const getters = {
   },
   decimals: state => {
     return state.decimals
+  },
+  sidebar: state => {
+    return state.sidebar
   }
 }
 
 export const mutations = {
   SET_DARK_THEME: (state, payload) => {
     state.dark_theme = payload
+  },
+  SET_SIDEBAR: (state, payload) => {
+    state.sidebar = payload
   },
 }
 

@@ -53,7 +53,12 @@
           >
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn color="primary">Get Coins</v-btn>
+          <v-btn
+            color="primary"
+            target="_blank"
+            href="https://discord.gg/qfCRd75"
+            >Get Coins</v-btn
+          >
         </v-list-item-action>
       </v-list-item>
     </v-card>

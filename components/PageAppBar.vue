@@ -7,7 +7,9 @@
       fixed
       v-if="$vuetify.breakpoint.smAndDown"
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="$store.commit('app/SET_SIDEBAR', true)"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
       <v-spacer></v-spacer>
       <user-menu></user-menu>
