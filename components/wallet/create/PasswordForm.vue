@@ -25,7 +25,7 @@
         :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show_password ? 'text' : 'password'"
         @click:append="show_password = !show_password"
-        v-validate="'required|min:8|max:86|confirmed:password'"
+        v-validate="'required|confirmed:password'"
         data-vv-name="password_confirmation"
         :error-messages="errors.collect('password_confirmation')"
       ></v-text-field>
