@@ -1,13 +1,13 @@
 <template>
   <v-bottom-navigation app grow>
-    <v-btn to="/blocks" nuxt-link>
-      <span>Blocks</span>
-      <v-icon>mdi-cube</v-icon>
+    <v-btn to="/" nuxt-link>
+      <span>Home</span>
+      <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <v-btn to="/transactions" nuxt-link>
-      <span>Transactions</span>
-      <v-icon>mdi-bank-transfer</v-icon>
+    <v-btn to="/bank" nuxt-link>
+      <span>Bank</span>
+      <v-icon>mdi-bank</v-icon>
     </v-btn>
 
     <v-btn to="/staking" nuxt-link>

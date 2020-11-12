@@ -1,27 +1,24 @@
 <template>
   <page-template>
-    <v-app-bar
-      app
-      color="red darken-1"
-      dark
-      fixed
-      v-if="$vuetify.breakpoint.smAndDown"
-    >
-      <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
-    </v-app-bar>
-    <h1 v-else class="mb-8">{{ title }}</h1>
+    <page-app-bar :title="title"></page-app-bar>
     <v-card class="mb-8">
       <v-container>
         <v-row>
           <v-col cols="12" md="7">
             <h6 class="text-h6 mb-1">Your address</h6>
-            <span class="mr-2 address">{{ address }}</span>
-            <v-btn icon>
-              <v-icon>mdi-content-copy</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>mdi-qrcode-scan</v-icon>
-            </v-btn>
+            <v-container class="pa-0">
+              <v-row>
+                <v-col cols="10" class="py-0">
+                  <markup :content="address"></markup>
+                </v-col>
+                <v-col cols="2">
+                  <v-btn icon @click.stop="showAddress = true">
+                    <v-icon>mdi-qrcode-scan</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+            <bank-receive-dialog :show-modal="showAddress" v-on:close="onCloseAddress"></bank-receive-dialog>
           </v-col>
           <v-col cols="12" md="5">
             <h6 class="text-h6">Your balance</h6>
@@ -67,7 +64,8 @@ export default {
     return {
       title: `Home`,
       loading: false,
-      balance: null
+      balance: null,
+      showAddress: false
     }
   },
   created() {
@@ -105,6 +103,9 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    onCloseAddress() {
+      this.showAddress = false
     }
   }
 }

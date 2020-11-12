@@ -5,7 +5,7 @@
     <v-divider></v-divider>
     <v-container>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-text-field
             v-model="form.to_address"
             label="To address"
@@ -17,7 +17,7 @@
             :error-messages="errors.collect('recipient')"
           ></v-text-field>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="6" md="3">
           <v-autocomplete
             v-model="form.coin"
             required
@@ -25,7 +25,7 @@
             :items="coins"
           ></v-autocomplete>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="6" md="3">
           <v-text-field
             v-model="form.amount"
             autocomplete="off"
@@ -41,7 +41,7 @@
         </v-col>
       </v-row>
       <v-row v-if="advanced">
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <v-text-field
             v-model="form.memo"
             label="Memo (optional)"
@@ -51,28 +51,27 @@
             :error-messages="errors.collect('memo')"
           ></v-text-field>
         </v-col>
-        <v-col cols="3">
-          <v-text-field
-            v-model="form.gas_price"
-            label="Gas Price"
-            type="number"
-            :suffix="$store.getters[`app/stake_denom`]"
-            required
-            v-validate="'decimal:8|min_value:0'"
-            data-vv-name="gas_price"
-            :error-messages="errors.collect('gas_price')"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="3">
+        <v-col cols="6" md="3">
           <v-text-field
             v-model="form.gas_limit"
             label="Gas Limit"
             type="number"
-            :suffix="$store.getters[`app/stake_denom`]"
             required
             data-vv-name="gas_limit"
-            v-validate="'integer|min_value:0'"
+            v-validate="'integer|min_value:0|max_value:2000000'"
             :error-messages="errors.collect('gas_limit')"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6" md="3">
+          <v-text-field
+            v-model="form.gas_price"
+            label="Gas Price"
+            type="number"
+            :suffix="$store.getters[`app/micro_stake_denom`].toLowerCase()"
+            required
+            v-validate="'decimal:8|min_value:0'"
+            data-vv-name="gas_price"
+            :error-messages="errors.collect('gas_price')"
           ></v-text-field>
         </v-col>
       </v-row>

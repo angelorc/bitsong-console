@@ -3,7 +3,10 @@
     <v-menu v-model="menu" :nudge-width="200" offset-overflow>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
-          <Jdenticon :address="address" />
+          <Jdenticon v-if="$vuetify.breakpoint.mdAndUp" :address="address" />
+          <v-icon v-else>
+            mdi-account
+          </v-icon>
         </v-btn>
       </template>
 

@@ -1,15 +1,6 @@
 <template>
   <page-template>
-    <v-app-bar
-      app
-      color="red darken-1"
-      dark
-      fixed
-      v-if="$vuetify.breakpoint.smAndDown"
-    >
-      <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
-    </v-app-bar>
-    <h1 v-else class="mb-8">{{ title }}</h1>
+    <page-app-bar :title="title"></page-app-bar>
     <bank-send></bank-send>
   </page-template>
 </template>
