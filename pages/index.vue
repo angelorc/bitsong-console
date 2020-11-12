@@ -38,7 +38,7 @@
     </v-card>
 
     <v-card class="mb-8">
-      <v-list-item>
+      <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="text-h5">Faucet</v-list-item-title>
           <v-list-item-subtitle class="text-h6"
@@ -52,7 +52,7 @@
             ></v-list-item-subtitle
           >
         </v-list-item-content>
-        <v-list-item-action>
+        <v-list-item-action v-if="$vuetify.breakpoint.mdAndUp">
           <v-btn
             color="primary"
             target="_blank"
@@ -61,6 +61,50 @@
           >
         </v-list-item-action>
       </v-list-item>
+      <v-card-actions v-if="$vuetify.breakpoint.smAndDown">
+        <v-btn
+          block
+          color="primary"
+          target="_blank"
+          href="https://discord.gg/qfCRd75"
+          >Get Coins</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+    <v-card class="mb-8">
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-title class="text-h5"
+            >BitSong Explorer</v-list-item-title
+          >
+          <v-list-item-subtitle class="text-h6"
+            >Explore your account</v-list-item-subtitle
+          >
+          <v-list-item-subtitle class="pt-3 pt-2 subtitle-1"
+            >Use the BitSong Explorer to see your account
+            <span class="font-weight-medium"
+              >analytics.</span
+            ></v-list-item-subtitle
+          >
+        </v-list-item-content>
+        <v-list-item-action v-if="$vuetify.breakpoint.mdAndUp">
+          <v-btn
+            color="primary"
+            target="_blank"
+            :href="`https://testnet.explorebitsong.com/account/${this.address}`"
+            >Go to BitSong Explorer</v-btn
+          >
+        </v-list-item-action>
+      </v-list-item>
+      <v-card-actions v-if="$vuetify.breakpoint.smAndDown">
+        <v-btn
+          block
+          color="primary"
+          target="_blank"
+          :href="`https://testnet.explorebitsong.com/account/${this.address}`"
+          >Go to BitSong Explorer</v-btn
+        >
+      </v-card-actions>
     </v-card>
     <v-card>
       <v-card-title>Last 10 Transactions</v-card-title>

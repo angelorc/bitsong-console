@@ -28,9 +28,15 @@ export default {
   components: {
     PageTemplate
   },
+  head() {
+    const title = `Bank ${this.address}`
+    return {
+      title: title,
+      meta: [{ hid: 'og-title', name: 'og:title', content: title }]
+    }
+  },
   data() {
     return {
-      title: `Staking`,
       cards: [
         {
           title: 'Create Validator',
@@ -47,6 +53,11 @@ export default {
         },
         { title: 'Unbond', subtitle: 'Unbond tokens from a validator.' }
       ]
+    }
+  },
+  computed: {
+    address() {
+      return this.$store.getters['wallet/address']
     }
   }
 }
