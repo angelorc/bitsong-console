@@ -34,7 +34,7 @@
     </template>
 
     <template v-slot:actions>
-      <v-btn :disabled="canContinue" color="primary" @click.stop="onSend">
+      <v-btn :disabled="disabled" color="primary" @click.stop="onSend">
         Send
       </v-btn>
     </template>
@@ -91,10 +91,10 @@ export default {
   },
 
   computed: {
-    canContinue() {
+    disabled() {
       return (
-        this.form.to_address === '' &&
-        this.form.coin === null &&
+        this.form.to_address === '' ||
+        this.form.coin === null ||
         this.form.amount === ''
       )
     },

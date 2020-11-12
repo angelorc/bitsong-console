@@ -8,7 +8,7 @@
     v-validate="rulesRecipient"
     data-vv-name="recipient"
     :error-messages="errors.collect('recipient')"
-    @keyup="$emit('update:address', lazyValue)"
+    @change="$emit('update:address', lazyValue)"
   ></v-text-field>
 </template>
 

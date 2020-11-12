@@ -1,12 +1,6 @@
 <template>
   <div>
-    <v-app-bar
-      color="transparent"
-      flat
-      app
-      fixed
-      v-if="$vuetify.breakpoint.smAndDown"
-    >
+    <v-app-bar flat app fixed v-if="$vuetify.breakpoint.smAndDown">
       <v-app-bar-nav-icon
         @click.stop="$store.commit('app/SET_SIDEBAR', true)"
       ></v-app-bar-nav-icon>
