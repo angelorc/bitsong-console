@@ -4,9 +4,9 @@
   "private": false,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "build": "NUXT_PORT=3333 nuxt build",
+    "start": "NUXT_PORT=3333 nuxt start",
+    "generate": "NUXT_PORT=3333 nuxt generate"
   },
   "dependencies": {
     "@bitsongofficial/js-sdk": "file:./lib/bitsongofficial-js-sdk-0.0.3.tgz",
