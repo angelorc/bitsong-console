@@ -23,6 +23,8 @@
             required
             label="Coin"
             :items="coins"
+            item-text="text"
+            item-value="denom"
           ></v-autocomplete>
         </v-col>
         <v-col cols="6" md="3">
@@ -33,7 +35,7 @@
             :hint="balanceText"
             type="number"
             required
-            :suffix="form.coin"
+            :suffix="convertMicroDenom(form.coin)"
             v-validate="'decimal:6'"
             data-vv-name="amount"
             :error-messages="errors.collect('amount')"
@@ -77,23 +79,31 @@
       </v-row>
     </v-container>
     <v-card-actions>
-       <v-switch
+      <v-switch
         v-model="advanced"
         label="ADVANCED"
         class="ml-2 font-weight-bold"
       ></v-switch>
       <v-spacer></v-spacer>
-      <v-btn color="primary" @click.stop="onSend">Send</v-btn>
+      <v-btn
+        :disabled="
+          form.to_address === '' && form.coin === null && form.amount === ''
+        "
+        color="primary"
+        @click.stop="onSend"
+        >Send</v-btn
+      >
     </v-card-actions>
     <bank-send-dialog
-      :show-modal="showModal"
+      v-if="showModal"
       :to_address="form.to_address"
       :amount="form.amount"
       :coin="form.coin"
       :memo="form.memo"
       :gas_price="form.gas_price"
       :gas_limit="form.gas_limit"
-      :loading="loading"
+      :loading="loadingModal"
+      :response="response"
       v-on:cancel="onCancel"
       v-on:confirm="onConfirm"
     ></bank-send-dialog>
@@ -101,22 +111,33 @@
 </template>
 
 <script>
-import { convertMacroToMicroAmount, convertMicroToMacroAmount } from '@/lib/utils'
+import {
+  convertMacroToMicroAmount,
+  convertMicroToMacroAmount,
+  convertMicroDenom,
+  parserErrorResponse
+} from '@/lib/utils'
 
 export default {
   data: () => ({
     loading: false,
+    loadingModal: false,
     coins: [],
     balance: [],
     advanced: false,
     showModal: false,
+    response: {
+      success: false,
+      log: null,
+      tx_hash: null
+    },
     form: {
       to_address: '',
       coin: null,
       amount: '',
       memo: '',
       gas_price: 0,
-      gas_limit: 0,
+      gas_limit: 0
     }
   }),
   created() {
@@ -152,21 +173,35 @@ export default {
       }
     },
     balanceText() {
-      if (this.balance.length === 0) return `Your balance: 0 ${this.stake_denom}`
+      if (this.balance.length === 0) return `Max: 0 ${this.stake_denom}`
 
       let coin
       if (this.form.coin === null) {
-        coin = this.balance.find(c => c.denom.toUpperCase() === this.micro_stake_denom)
-        if (coin === undefined) return `Your balance: 0 ${this.stake_denom}`
-        return `Your balance: ${convertMicroToMacroAmount(coin.amount, this.decimals)} ${this.stake_denom}`
+        coin = this.balance.find(
+          c => c.text.toUpperCase() === this.micro_stake_denom
+        )
+        if (coin === undefined) return `Max: 0 ${this.stake_denom}`
+        return `Max: ${convertMicroToMacroAmount(coin.amount, this.decimals)} ${
+          this.stake_denom
+        }`
       }
 
-      coin = this.balance.find(c => c.denom.toUpperCase() === this.form.coin)
-      if (coin === undefined) return `Your balance: 0 ${this.form.coin}`
-      return `Your balance: ${convertMicroToMacroAmount(coin.amount, this.decimals)}${coin.denom.toUpperCase()}`
-    },
+      coin = this.balance.find(
+        c => c.denom.toUpperCase() === this.form.coin.toUpperCase()
+      )
+
+      if (coin === undefined)
+        return `Max: 0 ${convertMicroDenom(this.form.coin)}`
+      return `Max: ${convertMicroToMacroAmount(
+        coin.amount,
+        this.decimals
+      )}${convertMicroDenom(coin.denom)}`
+    }
   },
   methods: {
+    convertMicroDenom(denom) {
+      return convertMicroDenom(denom)
+    },
     async getAccount() {
       try {
         this.loading = true
@@ -174,10 +209,24 @@ export default {
 
         if (account.value && account.value.coins) {
           this.coins = account.value.coins.map(c => {
-            if (c.denom.toUpperCase() === this.micro_stake_denom) return this.stake_denom
-            return c.denom.toUpperCase()
+            if (c.denom.toUpperCase() === this.micro_stake_denom) {
+              return {
+                denom: this.micro_stake_denom,
+                text: this.stake_denom
+              }
+            }
+
+            return {
+              denom: c.denom.toUpperCase(),
+              text: convertMicroDenom(c.denom)
+            }
           })
-          this.balance = account.value.coins
+          this.balance = account.value.coins.map(c => {
+            return {
+              ...c,
+              text: convertMicroDenom(c.denom)
+            }
+          })
         }
 
         this.loading = false
@@ -194,17 +243,28 @@ export default {
     },
     onCancel() {
       this.showModal = false
+      this.resetResponse()
+    },
+    resetResponse() {
+      this.response = {
+        success: false,
+        log: null,
+        tx_hash: null
+      }
     },
     async onConfirm() {
-      this.loading = true
+      this.resetResponse()
+      this.loadingModal = true
 
       const payload = {
         from_address: this.address,
         to_address: this.form.to_address,
         amount: [
           {
-            amount: String(convertMacroToMicroAmount(this.form.amount)),
-            denom: this.form.coin
+            denom: this.form.coin.toLowerCase(),
+            amount: String(
+              convertMacroToMicroAmount(this.form.amount, this.decimals)
+            )
           }
         ]
       }
@@ -218,9 +278,9 @@ export default {
         this.form.gas_limit
       )
 
-      console.log(response)
-      this.loading = false
+      this.response = parserErrorResponse(response)
+      this.loadingModal = false
     }
-  },
+  }
 }
 </script>

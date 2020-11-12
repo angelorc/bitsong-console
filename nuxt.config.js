@@ -49,6 +49,7 @@ export default {
   env: {
     SHORT_TITLE: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Console`,
     API: process.env.API ? process.env.API : `http://localhost:3001/api/v1`,
+    EXPLORER_URL: process.env.EXPLORER_URL ? process.env.EXPLORER_URL : `https://testnet.explorebitsong.com`,
 
     GA_ID: process.env.GA_ID ? process.env.GA_ID : ``,
     SEO_TITLE: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong (BTSG) Blockchain Console`,
@@ -114,12 +115,12 @@ export default {
   },
 
   proxy: {
-    // '/rpc': {
-    //   target: process.env.RPC,
-    //   pathRewrite: {
-    //     '^/rpc': '/'
-    //   }
-    // }
+    '/lcd': {
+      target: process.env.LCD,
+      pathRewrite: {
+        '^/lcd': '/'
+      }
+    }
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

@@ -18,7 +18,10 @@
                 </v-col>
               </v-row>
             </v-container>
-            <bank-receive-dialog :show-modal="showAddress" v-on:close="onCloseAddress"></bank-receive-dialog>
+            <bank-receive-dialog
+              v-if="showAddress"
+              v-on:close="onCloseAddress"
+            ></bank-receive-dialog>
           </v-col>
           <v-col cols="12" md="5">
             <h6 class="text-h6">Your balance</h6>
@@ -38,8 +41,16 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h5">Faucet</v-list-item-title>
-          <v-list-item-subtitle class="text-h6">Get faucet coin to test BitSong blockchain</v-list-item-subtitle>
-          <v-list-item-subtitle class="pt-3 pt-2 subtitle-1">Faucet tokens are free tokens that you can use in {{ $store.getters[`app/chain_id`] }}. <span class="font-weight-medium">Please do not abuse!</span></v-list-item-subtitle>
+          <v-list-item-subtitle class="text-h6"
+            >Get faucet coin to test BitSong blockchain</v-list-item-subtitle
+          >
+          <v-list-item-subtitle class="pt-3 pt-2 subtitle-1"
+            >Faucet tokens are free tokens that you can use in
+            {{ $store.getters[`app/chain_id`] }}.
+            <span class="font-weight-medium"
+              >Please do not abuse!</span
+            ></v-list-item-subtitle
+          >
         </v-list-item-content>
         <v-list-item-action>
           <v-btn color="primary">Get Coins</v-btn>
@@ -58,7 +69,7 @@ import PageTemplate from '@/components/PageTemplate'
 export default {
   middleware: 'authenticated',
   components: {
-    PageTemplate,
+    PageTemplate
   },
   data() {
     return {
@@ -74,7 +85,7 @@ export default {
   computed: {
     address() {
       return this.$store.getters[`wallet/address`]
-    },
+    }
   },
   methods: {
     async getAccount() {
@@ -90,7 +101,9 @@ export default {
         }
 
         if (account.value && account.value.coins.length > 0) {
-          const coin = account.value.coins.find(c => c.denom === process.env.MICROSTAKEDENOM)
+          const coin = account.value.coins.find(
+            c => c.denom === process.env.MICROSTAKEDENOM
+          )
           if (coin !== undefined) {
             this.balance = {
               amount: coin.amount,

@@ -1,15 +1,20 @@
 <template>
-  <v-app-bar
-    app
-    color="red darken-1"
-    dark
-    fixed
-    v-if="$vuetify.breakpoint.smAndDown"
-  >
-    <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <user-menu></user-menu>
-  </v-app-bar>
+  <div>
+    <v-app-bar
+      color="transparent"
+      flat
+      app
+      fixed
+      v-if="$vuetify.breakpoint.smAndDown"
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title class="text-h5"> {{ title }} </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <user-menu></user-menu>
+    </v-app-bar>
+    <v-divider v-if="$vuetify.breakpoint.smAndDown"></v-divider>
+    <h1 v-else class="mb-8">{{ title }}</h1>
+  </div>
 </template>
 
 <script>

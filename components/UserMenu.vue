@@ -11,19 +11,17 @@
       </template>
 
       <v-card width="300">
-        <v-list style="background-color: #D11D27">
-          <v-list-item two-line>
-            <v-list-item-avatar>
-              <Jdenticon :address="address" />
-            </v-list-item-avatar>
+        <v-list-item two-line class="primary">
+          <v-list-item-avatar>
+            <Jdenticon :address="address" />
+          </v-list-item-avatar>
 
-            <v-list-item-content class="text-center">
-              <v-list-item-title class="white--text font-weight-medium">
-                {{ address }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+          <v-list-item-content class="text-center">
+            <v-list-item-title class="white--text font-weight-medium">
+              {{ address }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
         <v-divider></v-divider>
 

@@ -3,11 +3,12 @@ export const state = () => ({
   micro_stake_denom: process.env.MICROSTAKEDENOM,
   stake_denom: process.env.STAKEDENOM,
   dark_theme: false,
-  gas_price: process.env.DEFAULT_GAS_PRICE,
+  gas_price: process.env.DEFAULT_GAS_PRICE, // TODO: try long response
   gas_limit: process.env.DEFAULT_GAS_LIMIT,
   address_prefix: process.env.ADDRESS_PREFIX,
   address_length: process.env.ADDRESS_LENGTH,
-  decimals: process.env.DECIMALS
+  decimals: process.env.DECIMALS,
+  explorer_url: process.env.EXPLORER_URL
 })
 
 export const getters = {
