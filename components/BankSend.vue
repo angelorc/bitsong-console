@@ -256,35 +256,34 @@ export default {
       this.resetResponse()
       this.loadingModal = true
 
-      console.log(this.address)
-      console.log(this.form)
-      console.log(this.decimals)
+      try {
+        const payload = {
+          from_address: this.address,
+          to_address: this.form.to_address,
+          amount: [
+            {
+              denom: this.form.coin.toLowerCase(),
+              amount: String(
+                convertMacroToMicroAmount(this.form.amount, this.decimals)
+              )
+            }
+          ]
+        }
 
-      const payload = {
-        from_address: this.address,
-        to_address: this.form.to_address,
-        amount: [
-          {
-            denom: this.form.coin.toLowerCase(),
-            amount: String(
-              convertMacroToMicroAmount(this.form.amount, this.decimals)
-            )
-          }
-        ]
+        const response = await this.$bitsong.send(
+          payload,
+          this.address,
+          this.form.memo,
+          this.$store.getters['wallet/privateKey'],
+          this.form.gas_price,
+          this.form.gas_limit
+        )
+
+        this.response = parseErrorResponse(response)
+      } catch (e) {
+        this.response.log = e.message
       }
 
-      console.log(payload)
-
-      const response = await this.$bitsong.send(
-        payload,
-        this.address,
-        this.form.memo,
-        this.$store.getters['wallet/privateKey'],
-        this.form.gas_price,
-        this.form.gas_limit
-      )
-
-      this.response = parseErrorResponse(response)
       this.loadingModal = false
     }
   }
