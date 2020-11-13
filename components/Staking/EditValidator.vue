@@ -241,7 +241,7 @@ export default {
             identity: this.form.identity,
             website: this.form.website,
             security_contact: this.form.security_contact,
-            details: this.form.details
+            details: this.form.description
           },
           address: this.form.validator,
           commission_rate: this.form.commission_rate,
