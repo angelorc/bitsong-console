@@ -85,7 +85,7 @@ export default {
           icon: 'mdi-diamond-stone',
           title: 'Distribution',
           to: '/distribution',
-          enabled: false
+          enabled: true
         },
         {
           icon: 'mdi-close-octagon',

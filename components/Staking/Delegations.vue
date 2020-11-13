@@ -12,10 +12,10 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="text-h6">
-              {{ delegation.name }}
+              {{ delegation.validator_name }}
             </v-list-item-title>
             <v-list-item-subtitle>
-              Stake
+              Reward
               <amount
                 :micro-amount="delegation.balance.amount"
                 :denom="delegation.balance.denom"
@@ -63,7 +63,7 @@
                   size="40px"
                 />
                 <div>
-                  <v-card-title>{{ delegation.name }}</v-card-title>
+                  <v-card-title>{{ delegation.validator_name }}</v-card-title>
                   <v-card-subtitle>{{
                     delegation.validator_address
                   }}</v-card-subtitle>
@@ -130,7 +130,7 @@ export default {
             )
             return {
               ...d,
-              name: val !== undefined ? val.description.moniker : '',
+              validator_name: val !== undefined ? val.description.moniker : '',
               identity: val !== undefined ? val.description.identity : ''
             }
           })
