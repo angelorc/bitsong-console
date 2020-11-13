@@ -159,6 +159,7 @@ export default {
     loading: false,
     loadingModal: false,
     showModal: false,
+    validator: null,
     form: {
       validator: null,
       commission: null,
@@ -216,17 +217,17 @@ export default {
     async onValidatorSelected(evt) {
       this.loading = true
 
-      let val = await this.$btsg.getValidator(evt)
-      val = val.result
+      const val = await this.$btsg.getValidator(evt)
+      this.validator = val.result
 
-      this.form.validator = val.operator_address
-      this.form.commission = val.commission.commission_rates.rate
-      this.form.min_self_delegation = val.min_self_delegation
-      this.form.moniker = val.description.moniker
-      this.form.identity = val.description.identity
-      this.form.website = val.description.website
-      this.form.security_contact = val.description.security_contact
-      this.form.description = val.description.details
+      this.form.validator = this.validator.operator_address
+      this.form.commission = this.validator.commission.commission_rates.rate
+      this.form.min_self_delegation = this.validator.min_self_delegation
+      this.form.moniker = this.validator.description.moniker
+      this.form.identity = this.validator.description.identity
+      this.form.website = this.validator.description.website
+      this.form.security_contact = this.validator.description.security_contact
+      this.form.description = this.validator.description.details
 
       this.loading = false
     },
@@ -244,8 +245,8 @@ export default {
             details: this.form.description
           },
           address: this.form.validator,
-          commission_rate: this.form.commission_rate,
-          min_self_delegation: this.form.min_self_delegation
+          commission_rate: this.form.commission,
+          min_self_delegation: this.form.min_self_delegation !== this.validator.min_self_delegation ? this.form.min_self_delegation : null
         }
 
         const response = await this.$bitsong.editValidator(
