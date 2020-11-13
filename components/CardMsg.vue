@@ -71,19 +71,15 @@ export default {
       }
     },
     title: String,
-    subtitle: String
+    subtitle: String,
+    memo: String,
+    gas_price: [Number, String],
+    gas_limit: [Number, String]
   },
   data() {
     return {
-      advanced: false,
-      memo: '',
-      gas_price: 0,
-      gas_limit: 0
+      advanced: false
     }
-  },
-  created() {
-    this.gas_price = this.$store.getters['app/gas_price']
-    this.gas_limit = this.$store.getters['app/gas_limit']
   }
 }
 </script>

@@ -11,26 +11,22 @@
     v-on:update:gas_limit="form.gas_limit = $event"
   >
     <template v-slot:fields>
-      <v-col cols="12" md="6">
-        <input-address
-          v-model="form.to_address"
-          v-on:update:address="form.to_address = $event"
-        ></input-address>
-      </v-col>
-
-      <v-col cols="6" md="3">
-        <input-coin
-          v-model="form.coin"
-          v-on:update:coin="form.coin = $event"
-        ></input-coin>
-      </v-col>
-      <v-col cols="6" md="3">
-        <input-amount
-          v-model="form.amount"
-          :coin="form.coin"
-          v-on:update:amount="form.amount = $event"
-        ></input-amount>
-      </v-col>
+      <input-address
+        class="col-12 col-md-6"
+        v-model="form.to_address"
+        v-on:update:address="form.to_address = $event"
+      ></input-address>
+      <input-coin
+        class="col-12 col-md-3"
+        v-model="form.coin"
+        v-on:update:coin="form.coin = $event"
+      ></input-coin>
+      <input-amount
+        class="col-12 col-md-3"
+        v-model="form.amount"
+        :coin="form.coin"
+        v-on:update:amount="form.amount = $event"
+      ></input-amount>
     </template>
 
     <template v-slot:actions>

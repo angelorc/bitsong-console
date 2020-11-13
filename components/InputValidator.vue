@@ -2,7 +2,7 @@
   <v-autocomplete
     v-model="lazyValue"
     required
-    label="Validator"
+    :label="label"
     :items="validators"
     item-text="text"
     item-value="value"
@@ -13,7 +13,11 @@
 <script>
 export default {
   props: {
-    value: null
+    value: null,
+    label: {
+      type: String,
+      default: 'Validator'
+    }
   },
 
   data() {

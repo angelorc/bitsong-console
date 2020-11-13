@@ -1,7 +1,7 @@
 <template>
   <card-msg
-    title="Delegate"
-    subtitle="Delegate liquid tokens to a validator."
+    title="Unbond"
+    subtitle="Unbond tokens from a validator."
     :loading="loading"
     :memo="form.memo"
     :gas_price="form.gas_price"
@@ -16,15 +16,13 @@
         v-model="form.validator"
         v-on:update:validator="form.validator = $event"
       ></input-validator>
-
       <input-coin
-        class="col-12 col-md-3"
+        class="col-6 col-md-3"
         v-model="form.coin"
         v-on:update:coin="form.coin = $event"
       ></input-coin>
-
       <input-amount
-        class="col-12 col-md-3"
+        class="col-6 col-md-3"
         v-model="form.amount"
         :coin="form.coin"
         v-on:update:amount="form.amount = $event"
@@ -38,7 +36,7 @@
     </template>
 
     <template v-slot:dialog>
-      <staking-delegate-confirmation
+      <staking-unbond-confirmation
         v-if="showModal"
         :validator="form.validator"
         :amount="form.amount"
@@ -50,14 +48,14 @@
         :response="response"
         v-on:cancel="onCancel"
         v-on:confirm="onConfirm"
-      ></staking-delegate-confirmation>
+      ></staking-unbond-confirmation>
     </template>
   </card-msg>
 </template>
 
 <script>
 import { convertMacroToMicroAmount, parseErrorResponse } from '@/lib/utils'
-import StakingDelegateConfirmation from '@/components/Staking/DelegateConfirmation'
+import StakingUnbondConfirmation from '@/components/Staking/UnbondConfirmation'
 
 export default {
   props: {
@@ -65,7 +63,7 @@ export default {
   },
 
   components: {
-    StakingDelegateConfirmation
+    StakingUnbondConfirmation
   },
 
   data: () => ({
@@ -144,7 +142,7 @@ export default {
           }
         }
 
-        const response = await this.$bitsong.delegate(
+        const response = await this.$bitsong.unbond(
           payload,
           this.address,
           this.form.memo,

@@ -1,7 +1,7 @@
 <template>
   <card-msg
-    title="Delegate"
-    subtitle="Delegate liquid tokens to a validator."
+    title="Create validator"
+    subtitle="Create new validator initialized with a self-delegation to it."
     :loading="loading"
     :memo="form.memo"
     :gas_price="form.gas_price"
@@ -11,24 +11,34 @@
     v-on:update:gas_limit="form.gas_limit = $event"
   >
     <template v-slot:fields>
-      <input-validator
-        class="col-12 col-md-6"
-        v-model="form.validator"
-        v-on:update:validator="form.validator = $event"
-      ></input-validator>
+      <input-address class="col-12 col-md-6" label="valoper"></input-address>
+      <input-address class="col-12 col-md-6" label="pubkey"></input-address>
+      <v-card-title class="col-12">Description</v-card-title>
+      <v-text-field class="col-12 col-md-6" label="Moniker"></v-text-field>
+      <v-text-field class="col-12 col-md-6" label="Moniker"></v-text-field>
+      <v-text-field class="col-12 col-md-6" label="Moniker"></v-text-field>
+      <v-text-field class="col-12 col-md-6" label="Moniker"></v-text-field>
+      <v-text-field class="col-12" label="Moniker"></v-text-field>
 
-      <input-coin
-        class="col-12 col-md-3"
-        v-model="form.coin"
-        v-on:update:coin="form.coin = $event"
-      ></input-coin>
-
-      <input-amount
-        class="col-12 col-md-3"
-        v-model="form.amount"
-        :coin="form.coin"
-        v-on:update:amount="form.amount = $event"
-      ></input-amount>
+      <v-col cols="12" md="6">
+        <input-validator
+          v-model="form.validator"
+          v-on:update:validator="form.validator = $event"
+        ></input-validator>
+      </v-col>
+      <v-col cols="6" md="3">
+        <input-coin
+          v-model="form.coin"
+          v-on:update:coin="form.coin = $event"
+        ></input-coin>
+      </v-col>
+      <v-col cols="6" md="3">
+        <input-amount
+          v-model="form.amount"
+          :coin="form.coin"
+          v-on:update:amount="form.amount = $event"
+        ></input-amount>
+      </v-col>
     </template>
 
     <template v-slot:actions>
@@ -59,13 +69,16 @@
 import { convertMacroToMicroAmount, parseErrorResponse } from '@/lib/utils'
 import StakingDelegateConfirmation from '@/components/Staking/DelegateConfirmation'
 
+import InputAddress from '@/components/InputAddress'
+
 export default {
   props: {
     value: String
   },
 
   components: {
-    StakingDelegateConfirmation
+    StakingDelegateConfirmation,
+    InputAddress
   },
 
   data: () => ({
