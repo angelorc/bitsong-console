@@ -20,6 +20,18 @@ export default {
     Toolbar,
     MobileToolbar,
     AppFooter
+  },
+  mounted() {
+    const workbox = await window.$workbox;
+    console.log(workbox)
+    if (workbox) {
+      workbox.addEventListener('installed', (event) => {
+        console.log(event)
+        if (event.isUpdate) {
+          console.log('update')
+        }
+      });
+    }
   }
 }
 </script>
