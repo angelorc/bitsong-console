@@ -21,7 +21,7 @@ export default {
     MobileToolbar,
     AppFooter
   },
-  mounted() {
+  async mounted() {
     const workbox = await window.$workbox;
     console.log(workbox)
     if (workbox) {
