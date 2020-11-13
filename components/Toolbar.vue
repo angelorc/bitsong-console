@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar flat>
+  <v-toolbar flat color="transparent">
     <v-spacer />
     <user-menu v-if="address" />
   </v-toolbar>

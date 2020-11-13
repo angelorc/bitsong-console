@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import WalletHeader from "@/components/wallet/common/Header";
+import WalletHeader from '@/components/wallet/common/Header'
 
 export default {
   components: {
@@ -66,11 +66,11 @@ export default {
   },
   data() {
     return {
-      password: "",
-      confirm_password: "",
+      password: '',
+      confirm_password: '',
       show_password: false,
       agreement: false
-    };
+    }
   },
   methods: {
     async onContinue() {
@@ -78,10 +78,10 @@ export default {
         await this.$store.dispatch(
           `wallet/createAccountWithMnemonic`,
           this.password
-        );
-        this.$emit("onContinue");
+        )
+        this.$emit('onContinue')
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
     }
   },
@@ -92,8 +92,8 @@ export default {
         this.confirm_password.length >= 8 &&
         this.password === this.confirm_password &&
         this.agreement
-      );
+      )
     }
   }
-};
+}
 </script>

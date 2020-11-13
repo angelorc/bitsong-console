@@ -8,10 +8,13 @@
 
 <script>
 import PageTemplate from '@/components/PageTemplate'
+import BankSend from '@/components/Bank/Send'
 
 export default {
+  middleware: 'authenticated',
   components: {
-    PageTemplate
+    PageTemplate,
+    BankSend
   },
   head() {
     const title = `Bank ${this.address}`

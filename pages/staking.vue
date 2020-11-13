@@ -23,10 +23,14 @@
 
 <script>
 import PageTemplate from '@/components/PageTemplate'
+import StakingDelegate from '@/components/Staking/Delegate'
 
 export default {
+  middleware: 'authenticated',
+
   components: {
-    PageTemplate
+    PageTemplate,
+    StakingDelegate
   },
   head() {
     const title = `Bank ${this.address}`

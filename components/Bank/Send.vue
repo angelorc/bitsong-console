@@ -63,8 +63,12 @@ import {
   convertMicroToMacroAmount,
   parseErrorResponse
 } from '@/lib/utils'
+import BankSendConfirmation from '@/components/Bank/SendConfirmation'
 
 export default {
+  components: {
+    BankSendConfirmation
+  },
   data: () => ({
     loading: false,
     loadingModal: false,

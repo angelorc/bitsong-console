@@ -58,8 +58,12 @@
 
 <script>
 import { convertMacroToMicroAmount, parseErrorResponse } from '@/lib/utils'
+import StakingDelegateConfirmation from '@/components/Staking/DelegateConfirmation'
 
 export default {
+  components: {
+    StakingDelegateConfirmation
+  },
   data: () => ({
     loading: false,
     loadingModal: false,

@@ -101,11 +101,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-#sidebar
-  .v-list .v-list-item--active .v-icon
-    color: #E53935
-  &.color
-    background-color: #fafafa
-</style>

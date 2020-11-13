@@ -37,76 +37,71 @@
       </v-container>
     </v-card>
 
-    <v-card class="mb-8">
-      <v-list-item three-line>
-        <v-list-item-content>
-          <v-list-item-title class="text-h5">Faucet</v-list-item-title>
-          <v-list-item-subtitle class="text-h6"
-            >Get faucet coin to test BitSong blockchain</v-list-item-subtitle
-          >
-          <v-list-item-subtitle class="pt-3 pt-2 subtitle-1"
-            >Faucet tokens are free tokens that you can use in
-            {{ $store.getters[`app/chain_id`] }}.
-            <span class="font-weight-medium"
-              >Please do not abuse!</span
-            ></v-list-item-subtitle
-          >
-        </v-list-item-content>
-        <v-list-item-action v-if="$vuetify.breakpoint.mdAndUp">
-          <v-btn
-            color="primary"
-            target="_blank"
-            href="https://discord.gg/qfCRd75"
-            >Get Coins</v-btn
-          >
-        </v-list-item-action>
-      </v-list-item>
-      <v-card-actions v-if="$vuetify.breakpoint.smAndDown">
-        <v-btn
-          block
-          color="primary"
-          target="_blank"
-          href="https://discord.gg/qfCRd75"
-          >Get Coins</v-btn
-        >
-      </v-card-actions>
-    </v-card>
-    <v-card class="mb-8">
-      <v-list-item three-line>
-        <v-list-item-content>
-          <v-list-item-title class="text-h5"
-            >BitSong Explorer</v-list-item-title
-          >
-          <v-list-item-subtitle class="text-h6"
-            >Explore your account</v-list-item-subtitle
-          >
-          <v-list-item-subtitle class="pt-3 pt-2 subtitle-1"
-            >Use the BitSong Explorer to see your account
-            <span class="font-weight-medium"
-              >analytics.</span
-            ></v-list-item-subtitle
-          >
-        </v-list-item-content>
-        <v-list-item-action v-if="$vuetify.breakpoint.mdAndUp">
-          <v-btn
-            color="primary"
-            target="_blank"
-            :href="`https://testnet.explorebitsong.com/account/${this.address}`"
-            >Go to BitSong Explorer</v-btn
-          >
-        </v-list-item-action>
-      </v-list-item>
-      <v-card-actions v-if="$vuetify.breakpoint.smAndDown">
-        <v-btn
-          block
-          color="primary"
-          target="_blank"
-          :href="`https://testnet.explorebitsong.com/account/${this.address}`"
-          >Go to BitSong Explorer</v-btn
-        >
-      </v-card-actions>
-    </v-card>
-    <v-card>
+    <v-container class="pa-0 mb-8">
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-card>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="title">Faucet</v-list-item-title>
+                <v-list-item-subtitle class="subtitle-2"
+                  >Get faucet coin to test BitSong
+                  blockchain</v-list-item-subtitle
+                >
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-btn target="_blank" href="https://discord.gg/qfCRd75" icon>
+                  <v-icon>mdi-arrow-right</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+            <v-card-text
+              class="subtitle-1 pt-0 text--darken-3"
+              :class="{ 'grey--text text--darken-3': !$vuetify.theme.dark }"
+            >
+              Faucet tokens are free tokens that you can use in
+              {{ $store.getters[`app/chain_id`] }}.
+              <span class="font-weight-medium">Please do not abuse!</span>
+            </v-card-text>
+          </v-card>
+        </v-col>
+
+        <v-col>
+          <v-card height="138">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="title"
+                  >BitSong Explorer</v-list-item-title
+                >
+                <v-list-item-subtitle class="subtitle-2"
+                  >Explore your account</v-list-item-subtitle
+                >
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-btn
+                  target="_blank"
+                  :href="
+                    `https://testnet.explorebitsong.com/account/${this.address}`
+                  "
+                  icon
+                >
+                  <v-icon>mdi-arrow-right</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+            <v-card-text
+              class="subtitle-1 pt-0"
+              :class="{ 'grey--text text--darken-3': !$vuetify.theme.dark }"
+            >
+              Use the BitSong Explorer to see your account
+              <span class="font-weight-medium">analytics.</span>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-card v-if="false">
       <v-card-title>Last 10 Transactions</v-card-title>
     </v-card>
   </page-template>

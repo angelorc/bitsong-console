@@ -25,33 +25,7 @@ export default {
 </script>
 
 <style lang="sass">
-h3
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-
-.v-application .title
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.v-application .text-h4
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.v-application .text-h5
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.v-application .text-h6
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.v-card__title
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.v-toolbar__title
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
-  font-weight: 600
-
-.source-sans
-  font-family: 'Source Sans Pro', "Roboto", sans-serif !important
+.theme--light
+  &.v-application
+    background: #F4F4F4
 </style>

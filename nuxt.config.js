@@ -37,7 +37,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&display=swap"
+        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;800&display=swap"
       },
     ]
   },

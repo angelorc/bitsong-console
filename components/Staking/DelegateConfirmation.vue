@@ -33,8 +33,12 @@
 
 <script>
 import { convertMicroDenom, convertMacroToMicroAmount } from '@/lib/utils'
+import DialogConfirmation from '@/components/DialogConfirmation'
 
 export default {
+  components: {
+    DialogConfirmation
+  },
   props: {
     loading: {
       type: Boolean,

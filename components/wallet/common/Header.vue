@@ -17,12 +17,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     subtitle: {
       type: String,
-      default: ""
+      default: ''
     }
   }
-};
+}
 </script>
