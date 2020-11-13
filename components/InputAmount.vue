@@ -10,7 +10,7 @@
     v-validate="'decimal:6'"
     data-vv-name="amount"
     :error-messages="errors.collect('amount')"
-    @keyup="$emit('update:amount', lazyValue)"
+    @change="$emit('update:amount', lazyValue)"
   ></v-text-field>
 </template>
 

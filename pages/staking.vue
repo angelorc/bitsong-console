@@ -13,30 +13,9 @@
       v-model="delegate"
       class="mb-8"
     ></staking-delegate>
-
     <staking-unbond id="unbond" v-model="unbond" class="mb-8"></staking-unbond>
-
     <staking-redelegate class="mb-8"></staking-redelegate>
-
-    <staking-create-validator
-      v-if="false"
-      class="mb-8"
-    ></staking-create-validator>
-
-    <card-msg
-      v-if="false"
-      v-for="(card, i) in cards"
-      :key="i"
-      :title="card.title"
-      :subtitle="card.subtitle"
-      class="mb-8"
-    >
-      <template v-slot:fields> </template>
-
-      <template v-slot:actions> </template>
-
-      <template v-slot:dialog> </template>
-    </card-msg>
+    <staking-edit-validator class="mb-8"></staking-edit-validator>
   </page-template>
 </template>
 
@@ -46,7 +25,7 @@ import StakingDelegations from '@/components/Staking/Delegations'
 import StakingDelegate from '@/components/Staking/Delegate'
 import StakingUnbond from '@/components/Staking/Unbond'
 import StakingRedelegate from '@/components/Staking/Redelegate'
-import StakingCreateValidator from '@/components/Staking/CreateValidator'
+import StakingEditValidator from '@/components/Staking/EditValidator'
 
 export default {
   middleware: 'authenticated',
@@ -57,7 +36,7 @@ export default {
     StakingUnbond,
     StakingDelegations,
     StakingRedelegate,
-    StakingCreateValidator
+    StakingEditValidator
   },
   head() {
     const title = `Staking ${this.address}`
@@ -68,12 +47,6 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {
-          title: 'Edit Validator',
-          subtitle: 'Edit an existing validator account.'
-        }
-      ],
       delegate: null,
       unbond: null
     }
