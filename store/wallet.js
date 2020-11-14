@@ -1,6 +1,4 @@
 import { sleep } from '@/lib/utils'
-import Wallet from '@/lib/wallet'
-const wallet = new Wallet()
 
 export const state = () => ({
   loading: false,
@@ -57,7 +55,7 @@ export const actions = {
       commit(`toggleLoading`)
       await sleep(200)
 
-      const { address, mnemonic, privateKey } = await wallet.createAccountWithMnemonic()
+      const { address, mnemonic, privateKey } = this.$wallet.createAccountWithMneomnic()
       commit(`addWallet`, {
         address, mnemonic, privateKey, password
       })
@@ -79,7 +77,7 @@ export const actions = {
       commit(`toggleLoading`)
       await sleep(200)
 
-      await wallet.generateAndDownloadKeyStore(getters.privateKey, getters.password)
+      this.$wallet.generateAndDownloadKeyStore(getters.privateKey, getters.password)
 
       commit(`toggleLoading`)
     } catch (e) {
@@ -96,7 +94,7 @@ export const actions = {
       commit(`toggleLoading`)
       await sleep(200)
 
-      const { address } = await wallet.recoverAccountFromPrivateKey(privateKey)
+      const { address } = this.$wallet.recoverAccountFromPrivateKey(privateKey)
       commit(`addWallet`, {
         address, privateKey, password
       })
@@ -125,7 +123,7 @@ export const actions = {
       const {
         privateKey,
         address
-      } = await wallet.recoverAccountFromMnemonic(mnemonic)
+      } = this.$wallet.recoverAccountFromMnemonic(mnemonic)
       commit(`addWallet`, {
         mnemonic, address, privateKey, password
       })
@@ -155,7 +153,7 @@ export const actions = {
       const {
         privateKey,
         address
-      } = await wallet.recoverAccountFromKeystore(keystore, password)
+      } = this.$wallet.recoverAccountFromKeystore(keystore, password)
       commit(`addWallet`, {
         address, privateKey, password
       })

@@ -69,6 +69,8 @@ export default {
     DEFAULT_GAS_LIMIT: process.env.DEFAULT_GAS_LIMIT ? process.env.DEFAULT_GAS_LIMIT : 200000,
     ADDRESS_PREFIX: process.env.ADDRESS_PREFIX ? process.env.ADDRESS_PREFIX : `bitsong`,
     ADDRESS_LENGTH: process.env.ADDRESS_LENGTH ? process.env.ADDRESS_LENGTH : 46,
+    ADDRESS_START_REGEX: process.env.ADDRESS_START_REGEX ? process.env.ADDRESS_START_REGEX : /^bitsong1/,
+    HD_PATH: process.env.HD_PATH ? process.env.HD_PATH : `44'/118'/0'/0/`,
     DECIMALS: process.env.DECIMALS ? process.env.DECIMALS : 6,
     SIGN_MODE_TYPE: process.env.SIGN_MODE_TYPE ? process.env.SIGN_MODE_TYPE : 'block'
   },

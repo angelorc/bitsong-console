@@ -109,11 +109,13 @@
 
 <script>
 import PageTemplate from '@/components/PageTemplate'
+import BankReceiveDialog from '@/components/Bank/ReceiveDialog'
 
 export default {
   middleware: 'authenticated',
   components: {
-    PageTemplate
+    PageTemplate,
+    BankReceiveDialog
   },
   data() {
     return {

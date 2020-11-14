@@ -39,9 +39,13 @@ export default {
     address_length() {
       return this.$store.getters['app/address_length']
     },
+    address_start_regex() {
+      return this.$store.getters[`app/address_start_regex`]
+    },
     rulesRecipient() {
       return {
         required: true,
+        //regex: this.address_start_regex,
         regex: /^bitsong1/,
         max: this.address_length,
         min: this.address_length
