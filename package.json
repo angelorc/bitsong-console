@@ -1,7 +1,8 @@
 {
   "name": "bitsong-console",
   "version": "0.3.0",
-  "private": false,
+  "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "nuxt",
     "build": "NUXT_PORT=3333 nuxt build",
