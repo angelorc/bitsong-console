@@ -10,8 +10,15 @@
         <v-container class="fill-height">
           <v-row>
             <v-col class="text-center">
-              <qrcode-stream v-if="error === null" @decode="onDecode" @init="onInit"></qrcode-stream>
-              <p class="text--red" v-else>{{ error }}</p>
+              <v-progress-circular
+                indeterminate
+                color="primary"
+                v-if="loading"
+              ></v-progress-circular>
+              <div v-show="!loading">
+                <qrcode-stream v-if="error === null" :camera="camera" @decode="onDecode" @init="onInit"></qrcode-stream>
+                <p class="text--red" v-else>{{ error }}</p>
+              </div>
             </v-col>
           </v-row>
         </v-container>
@@ -36,7 +43,9 @@ export default {
 
   data() {
     return {
-      error: null
+      error: null,
+      loading: false,
+      camera: 'rear'
     }
   },
 
@@ -46,8 +55,12 @@ export default {
     },
 
     async onInit (promise) {
+      this.loading = true
+
       try {
-        await promise
+        const { capabilities } = await promise
+
+        // successfully initialized
       } catch (error) {
         if (error.name === 'NotAllowedError') {
           this.error = "ERROR: you need to grant camera access permisson"
@@ -58,10 +71,16 @@ export default {
         } else if (error.name === 'NotReadableError') {
           this.error = "ERROR: is the camera already in use?"
         } else if (error.name === 'OverconstrainedError') {
-          this.error = "ERROR: installed cameras are not suitable"
+          if (this.camera === 'rear') {
+            this.camera = 'auto'
+          } else {
+            this.error = "ERROR: installed cameras are not suitable"
+          }
         } else if (error.name === 'StreamApiNotSupportedError') {
           this.error = "ERROR: Stream API is not supported in this browser"
         }
+      } finally {
+        this.loading = false
       }
     }
   }
