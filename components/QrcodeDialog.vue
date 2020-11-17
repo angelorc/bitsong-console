@@ -25,6 +25,9 @@
       </v-sheet>
 
       <v-card-actions>
+        <v-btn text @click="switchCamera">
+          <v-icon left>mdi-camera-flip</v-icon> Switch
+        </v-btn>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('close')">Close</v-btn>
       </v-card-actions>
@@ -72,9 +75,9 @@ export default {
           this.error = "ERROR: is the camera already in use?"
         } else if (error.name === 'OverconstrainedError') {
           if (this.camera === 'rear') {
-            this.camera = 'auto'
+            this.error = "ERROR: installed cameras are not suitable. Try to switch camera"
           } else {
-            this.error = "ERROR: installed cameras are not suitable"
+            this.error = "ERROR: installed cameras are not suitable."
           }
         } else if (error.name === 'StreamApiNotSupportedError') {
           this.error = "ERROR: Stream API is not supported in this browser"
@@ -82,6 +85,18 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+
+    switchCamera() {
+      console.log('switch', this.camera)
+      this.loading = true
+      this.error = null
+      if (this.camera === 'rear') {
+        this.camera = 'auto'
+      } else {
+        this.camera = 'rear'
+      }
+      this.loading = false
     }
   }
 }
