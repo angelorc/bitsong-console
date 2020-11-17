@@ -99,45 +99,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      loading: false,
-      delegations: []
-    }
-  },
-  created() {
-    this.getDelegations()
-  },
-  computed: {
-    address() {
-      return this.$store.getters['wallet/address']
-    }
-  },
-  methods: {
-    async getDelegations() {
-      try {
-        this.loading = true
-        const validators = await this.$btsg.getValidators()
-        const delegations = await this.$btsg.getDelegations(this.address)
-
-        this.delegations = delegations
-          .sort((a, b) => {
-            return b.shares - a.shares
-          })
-          .map(d => {
-            const val = validators.result.find(
-              v => v.operator_address === d.validator_address
-            )
-            return {
-              ...d,
-              validator_name: val !== undefined ? val.description.moniker : '',
-              identity: val !== undefined ? val.description.identity : ''
-            }
-          })
-
-        this.loading = false
-      } catch (e) {
-        console.error(e)
+  props: {
+    loading: {
+      type: Boolean,
+      default: true
+    },
+    delegations: {
+      type: Array,
+      default() {
+        return []
       }
     }
   }

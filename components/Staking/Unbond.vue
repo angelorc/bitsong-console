@@ -155,6 +155,8 @@ export default {
           fee
         )
         this.response = parseErrorResponse(response)
+
+        this.$emit('txSuccess')
       } catch (e) {
         if (e !== undefined) {
           console.error(e)

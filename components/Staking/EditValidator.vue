@@ -259,6 +259,8 @@ export default {
         )
 
         this.response = parseErrorResponse(response)
+
+        this.$emit('txSuccess')
       } catch (e) {
         this.response.log = e.message
       }
