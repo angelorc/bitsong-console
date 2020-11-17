@@ -26,7 +26,7 @@
 
       <v-card-actions>
         <v-btn text @click="switchCamera">
-          <v-icon left>mdi-camera-flip</v-icon> Switch
+          <v-icon left>mdi-camera-flip</v-icon> Switch: {{ camera }}
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('close')">Close</v-btn>
@@ -88,11 +88,12 @@ export default {
     },
 
     switchCamera() {
-      console.log('switch', this.camera)
       this.loading = true
       this.error = null
       if (this.camera === 'rear') {
         this.camera = 'auto'
+      } else if (this.camera === 'auto') {
+        this.camera = 'front'
       } else {
         this.camera = 'rear'
       }
