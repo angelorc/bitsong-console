@@ -87,51 +87,21 @@
 import ValidatorAvatar from '@/components/ValidatorAvatar'
 
 export default {
-  components: {
-    ValidatorAvatar
-  },
-  data() {
-    return {
-      loading: false,
-      rewards: []
-    }
-  },
-  created() {
-    this.getRewards()
-  },
-  computed: {
-    address() {
-      return this.$store.getters['wallet/address']
-    }
-  },
-  methods: {
-    async getRewards() {
-      try {
-        this.loading = true
-        const validators = await this.$btsg.getValidators()
-        const rewards = await this.$btsg.getDelegatorRewards(this.address)
-
-        this.rewards = rewards.rewards
-          .map(r => {
-            const val = validators.result.find(
-              v => v.operator_address === r.validator_address
-            )
-            return {
-              ...r,
-              validator_name: val !== undefined ? val.description.moniker : '',
-              identity: val !== undefined ? val.description.identity : '',
-              amt: r.reward === null ? 0 : r.reward[0].amount
-            }
-          })
-          .sort((a, b) => {
-            return b.amt - a.amt
-          })
-
-        this.loading = false
-      } catch (e) {
-        console.error(e)
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    rewards: {
+      type: Array,
+      default() {
+        return []
       }
     }
+  },
+
+  components: {
+    ValidatorAvatar
   }
 }
 </script>

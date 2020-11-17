@@ -16,7 +16,7 @@
           <v-list-item-subtitle>Validator</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item>
+      <v-list-item v-if="commission">
         <v-list-item-action>
           <v-checkbox disabled v-model="commission"></v-checkbox>
         </v-list-item-action>
