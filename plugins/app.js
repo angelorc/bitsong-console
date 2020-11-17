@@ -1,11 +1,11 @@
-import Tendermint from '@/lib/tendermint'
+// import Tendermint from '@/lib/tendermint'
 import Api from '@/lib/api'
 import Btsg from '@/lib/btsg'
 import Bitsong from '@/lib/bitsong'
 
 import { BitSongClient } from "@bitsongofficial/js-sdk"
 
-export default (ctx, inject) => {
+export default async (ctx, inject) => {
   // const tm = new Tendermint(process.env.CHAIN_ID, process.env.SOCKET)
   // inject('tm', tm)
   // ctx.$tm = tm
@@ -22,6 +22,7 @@ export default (ctx, inject) => {
   inject('api', api)
   ctx.$api = api
 
+  // Init Bitsong Client
   const client = new BitSongClient(
     process.env.LCD,
     process.env.ADDRESS_PREFIX,
@@ -29,6 +30,20 @@ export default (ctx, inject) => {
   )
   inject('client', client)
   ctx.$client = client
+
+  // set mode to block
+  client.setMode("block")
+  // init chain
+  await client.initChain()
+
+  // set account
+  if (ctx.app.store.getters['wallet/address'] !== null) {
+    try {
+      await client.setAccountInfo(ctx.app.store.getters['wallet/privateKey'])
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   // ctx.app.store.dispatch(`app/startListening`)
   // ctx.app.store.dispatch(`consensus/subscribe`)

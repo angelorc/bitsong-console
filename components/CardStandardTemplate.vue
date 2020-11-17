@@ -69,33 +69,7 @@ export default {
       this.resetResponse()
       this.loadingModal = true
 
-      // try {
-      //   const payload = {
-      //     from_address: this.address,
-      //     to_address: this.form.to_address,
-      //     amount: [
-      //       {
-      //         denom: this.form.coin.toLowerCase(),
-      //         amount: String(
-      //           convertMacroToMicroAmount(this.form.amount, this.decimals)
-      //         )
-      //       }
-      //     ]
-      //   }
-
-      //   const response = await this.$bitsong.send(
-      //     payload,
-      //     this.address,
-      //     this.form.memo,
-      //     this.$store.getters['wallet/privateKey'],
-      //     this.form.gas_price,
-      //     this.form.gas_limit
-      //   )
-
-      //   this.response = parseErrorResponse(response)
-      // } catch (e) {
-      //   this.response.log = e.message
-      // }
+      // bitsong-js-sdk
 
       this.loadingModal = false
     }

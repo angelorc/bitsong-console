@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { Coin, Fee } from '@bitsongofficial/js-sdk'
+
 import {
   convertMacroToMicroAmount,
   convertMicroToMacroAmount,
@@ -125,31 +127,37 @@ export default {
       this.loadingModal = true
 
       try {
-        const payload = {
-          from_address: this.address,
-          to_address: this.form.to_address,
-          amount: [
-            {
-              denom: this.form.coin.toLowerCase(),
-              amount: String(
-                convertMacroToMicroAmount(this.form.amount, this.decimals)
-              )
-            }
-          ]
-        }
+        const amount = [
+          new Coin(
+            String(convertMacroToMicroAmount(this.form.amount, this.decimals)),
+            this.form.coin.toLowerCase()
+          )
+        ]
 
-        const response = await this.$bitsong.send(
-          payload,
-          this.address,
-          this.form.memo,
-          this.$store.getters['wallet/privateKey'],
-          this.form.gas_price,
-          this.form.gas_limit
+        const fee = new Fee(
+          [
+            new Coin(
+              String(this.form.gas_price * this.form.gas_limit),
+              this.$store.getters['app/micro_stake_denom'].toLowerCase()
+            )
+          ],
+          String(this.form.gas_limit)
         )
 
+        const response = await this.$client.send(
+          this.form.to_address,
+          amount,
+          this.form.memo,
+          fee
+        )
         this.response = parseErrorResponse(response)
       } catch (e) {
-        this.response.log = e.message
+        if (e !== undefined) {
+          console.error(e)
+          this.response.log = e.message
+        } else {
+          this.response.log = `Something went wrong!`
+        }
       }
 
       this.loadingModal = false

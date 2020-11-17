@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import { Coin, Fee } from '@bitsongofficial/js-sdk'
+
 import { convertMacroToMicroAmount, parseErrorResponse } from '@/lib/utils'
 import StakingDelegateConfirmation from '@/components/Staking/DelegateConfirmation'
 
@@ -133,29 +135,35 @@ export default {
       this.loadingModal = true
 
       try {
-        const payload = {
-          delegator_address: this.address,
-          validator_address: this.form.validator,
-          amount: {
-            denom: this.form.coin.toLowerCase(),
-            amount: String(
-              convertMacroToMicroAmount(this.form.amount, this.decimals)
-            )
-          }
-        }
-
-        const response = await this.$bitsong.delegate(
-          payload,
-          this.address,
-          this.form.memo,
-          this.$store.getters['wallet/privateKey'],
-          this.form.gas_price,
-          this.form.gas_limit
+        const amount = new Coin(
+          String(convertMacroToMicroAmount(this.form.amount, this.decimals)),
+          this.form.coin.toLowerCase()
         )
 
+        const fee = new Fee(
+          [
+            new Coin(
+              String(this.form.gas_price * this.form.gas_limit),
+              this.$store.getters['app/micro_stake_denom'].toLowerCase()
+            )
+          ],
+          String(this.form.gas_limit)
+        )
+
+        const response = await this.$client.delegate(
+          this.form.validator,
+          amount,
+          this.form.memo,
+          fee
+        )
         this.response = parseErrorResponse(response)
       } catch (e) {
-        this.response.log = e.message
+        if (e !== undefined) {
+          console.error(e)
+          this.response.log = e.message
+        } else {
+          this.response.log = `Something went wrong!`
+        }
       }
 
       this.loadingModal = false
