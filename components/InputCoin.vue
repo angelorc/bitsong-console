@@ -32,7 +32,8 @@ export default {
   },
 
   async created() {
-    const account = await this.$btsg.getAccount(this.address)
+    let account = await this.$client.getAccount(this.address)
+    account = account.result.result
 
     if (account.value && account.value.coins) {
       this.coins = account.value.coins.map(c => {

@@ -22,13 +22,13 @@ export default (ctx, inject) => {
   inject('api', api)
   ctx.$api = api
 
-  const wallet = new BitSongClient(
+  const client = new BitSongClient(
     process.env.LCD,
     process.env.ADDRESS_PREFIX,
     process.env.HD_PATH
   )
-  inject('wallet', wallet)
-  ctx.$wallet = wallet
+  inject('client', client)
+  ctx.$client = client
 
   // ctx.app.store.dispatch(`app/startListening`)
   // ctx.app.store.dispatch(`consensus/subscribe`)

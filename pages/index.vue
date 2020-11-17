@@ -137,7 +137,8 @@ export default {
     async getAccount() {
       try {
         this.loading = true
-        const account = await this.$btsg.getAccount(this.address)
+        let account = await this.$client.getAccount(this.address)
+        account = account.result.result
 
         if (account.value && account.value.coins.length === 0) {
           this.balance = {
