@@ -1,15 +1,21 @@
 <template>
-  <v-text-field
-    v-model="lazyValue"
-    label="To address"
-    :hint="`es: bitsong12kr8je8lcats0c5n94xlzhu7vs7s9dvvd7devl`"
-    required
-    clearable
-    v-validate="rulesRecipient"
-    data-vv-name="recipient"
-    :error-messages="errors.collect('recipient')"
-    @change="$emit('update:address', lazyValue)"
-  ></v-text-field>
+  <div class="pt-0">
+    <v-text-field
+      v-model="lazyValue"
+      label="To address"
+      :hint="`es: bitsong12kr8je8lcats0c5n94xlzhu7vs7s9dvvd7devl`"
+      required
+      clearable
+      autocomplete="off"
+      v-validate="rulesRecipient"
+      data-vv-name="recipient"
+      :error-messages="errors.collect('recipient')"
+      @change="$emit('update:address', lazyValue)"
+      append-icon="mdi-qrcode"
+      @click:append="onQrcodeClick"
+    ></v-text-field>
+    <qrcode-dialog v-if="qrDialog" v-on:onDecode="onDecode" v-on:close="onQrcodeClose" />
+  </div>
 </template>
 
 <script>
@@ -20,7 +26,8 @@ export default {
 
   data() {
     return {
-      lazyValue: this.value
+      lazyValue: this.value,
+      qrDialog: false
     }
   },
 
@@ -33,6 +40,20 @@ export default {
   beforeCreate() {
     this.$_modelEvent =
       (this.$options.model && this.$options.model.event) || 'input'
+  },
+
+  methods: {
+    onQrcodeClick() {
+      this.qrDialog = true
+    },
+    onQrcodeClose() {
+      this.qrDialog = false
+    },
+    onDecode(decodedStr) {
+      this.lazyValue = decodedStr
+      this.$emit('update:address', decodedStr)
+      this.qrDialog = false
+    }
   },
 
   computed: {
