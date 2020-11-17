@@ -53,8 +53,8 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-switch
-                v-model="$store.getters['app/dark_theme']"
-                @click="$store.dispatch('app/toggleDarkTheme')"
+                :value="$store.getters['settings/dark_theme']"
+                @click="toggleDarkTheme"
               ></v-switch>
             </v-list-item-action>
           </v-list-item>
@@ -118,6 +118,13 @@ export default {
     },
     address() {
       return this.$store.getters[`wallet/address`]
+    }
+  },
+
+  methods: {
+    toggleDarkTheme() {
+      this.$vuetify.theme.dark = !!this.$vuetify.theme.dark
+      this.$store.dispatch('settings/toggleDarkTheme')
     }
   }
 }

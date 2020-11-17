@@ -9,7 +9,7 @@
     "generate": "NUXT_PORT=3333 nuxt generate"
   },
   "dependencies": {
-    "@bitsongofficial/js-sdk": "https://github.com/bitsongofficial/js-sdk#v0.2.6-dev",
+    "@bitsongofficial/js-sdk": "https://github.com/bitsongofficial/js-sdk#v0.5.0-dev",
     "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",

@@ -9,7 +9,6 @@ export const state = () => ({
   address_start_regex: process.env.ADDRESS_START_REGEX,
   decimals: process.env.DECIMALS,
   explorer_url: process.env.EXPLORER_URL,
-  dark_theme: false,
   sidebar: false
 })
 
@@ -47,17 +46,10 @@ export const getters = {
 }
 
 export const mutations = {
-  SET_DARK_THEME: (state, payload) => {
-    state.dark_theme = payload
-  },
   SET_SIDEBAR: (state, payload) => {
     state.sidebar = payload
   },
 }
 
 
-export const actions = {
-  toggleDarkTheme({ commit, state }) {
-    commit('SET_DARK_THEME', !state.dark_theme)
-  }
-}
+export const actions = {}

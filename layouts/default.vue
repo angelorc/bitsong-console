@@ -14,23 +14,28 @@
 import Toolbar from '@/components/Toolbar'
 import MobileToolbar from '@/components/MobileToolbar'
 import AppFooter from '@/components/Footer'
+import Sidebar from '@/components/Sidebar'
 
 export default {
   components: {
     Toolbar,
     MobileToolbar,
-    AppFooter
+    AppFooter,
+    Sidebar
   },
   async mounted() {
-    const workbox = await window.$workbox;
+    const workbox = await window.$workbox
     if (workbox) {
-      workbox.addEventListener('installed', (event) => {
+      workbox.addEventListener('installed', event => {
         console.log(event)
         if (event.isUpdate) {
           console.log('update----------')
         }
-      });
+      })
     }
+  },
+  created() {
+    this.$vuetify.theme.dark = this.$store.getters[`settings/dark_theme`]
   }
 }
 </script>
