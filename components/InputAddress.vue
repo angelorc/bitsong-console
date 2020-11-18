@@ -11,6 +11,7 @@
       data-vv-name="recipient"
       :error-messages="errors.collect('recipient')"
       @change="$emit('update:address', lazyValue)"
+      @keyup="$emit('update:address', lazyValue)"
       append-icon="mdi-qrcode"
       @click:append="onQrcodeClick"
     ></v-text-field>
