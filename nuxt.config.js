@@ -157,6 +157,14 @@ export default {
         'https://fonts.googleapis.com/css?family=Material+Icons',
       ],*/
 
+      cacheNames: {
+        suffix: pkg.version
+      },
+      cacheOptions: {
+        cacheId: pkg.name,
+        revision: pkg.version
+      },
+
       // Runtime caching caches pages as we browse
       runtimeCaching: [
         {
