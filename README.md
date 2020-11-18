@@ -1,7 +1,7 @@
 # BitSong Blockchain Console
 
 <p>
-<img src="https://img.shields.io/badge/version-0.4.1-blue.svg" />
+<img src="https://img.shields.io/badge/version-0.4.2-blue.svg" />
 <a href="https://twitter.com/bitsongofficial">
 <img alt="Twitter: BitSong" src="https://img.shields.io/twitter/follow/bitsongofficial.svg?style=social"  target="_blank" />
 </a>
