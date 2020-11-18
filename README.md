@@ -1,4 +1,19 @@
-# bitsong-console
+# BitSong Blockchain Console
+
+<p>
+<img src="https://img.shields.io/badge/version-0.4.0-blue.svg" />
+<a href="https://twitter.com/bitsongofficial">
+<img alt="Twitter: BitSong" src="https://img.shields.io/twitter/follow/bitsongofficial.svg?style=social"  target="_blank" />
+</a>
+</p>
+
+**BitSong Console** allows you to interact with the BitSing blockchain in a simple and immediate way. Try the bank, staking, governane, auth and crisis.
+
+## THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
+
+## Try the console
+
+- [BitSong Console](https://console.bitsong.network)
 
 ## Build Setup
 
@@ -16,5 +31,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
