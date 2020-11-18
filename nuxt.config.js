@@ -1,12 +1,25 @@
+import pkg from './package.json'
 import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 
 export default {
+  /*
+   ** Nuxt rendering mode
+   ** See https://nuxtjs.org/api/configuration-mode
+   */
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
+   /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
   target: "static",
 
+  /*
+   ** Headers of the page
+   ** See https://nuxtjs.org/api/configuration-head
+   */
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: titleChunk => {
@@ -47,6 +60,8 @@ export default {
   ],
 
   env: {
+    WORKBOX_DEBUG: process.env.WORKBOX_DEBUG ? process.env.WORKBOX_DEBUG : false,
+    VERSION: pkg.version || '0.0.0',
     SHORT_TITLE: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Console`,
     API: process.env.API ? process.env.API : `http://localhost:3001/api/v1`,
     EXPLORER_URL: process.env.EXPLORER_URL ? process.env.EXPLORER_URL : `https://testnet.explorebitsong.com`,
@@ -78,6 +93,9 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [{
     src: "~/plugins/app.js",
+    ssr: false
+  },{
+    src: "~/plugins/sw.client.js",
     ssr: false
   }, {
     src: "~/plugins/seo-gtag.js",
@@ -121,6 +139,110 @@ export default {
       background_color: "#F4F4F4",
       display: "standalone",
       start_url: "/",
+      lang: 'en'
+    },
+    workbox: {
+      dev: process.env.WORKBOX_DEBUG,
+      config: { debug: process.env.WORKBOX_DEBUG },
+
+      // importScripts: [
+      //   '/offline-sw.js',
+      // ],
+
+      cleanupOutdatedCaches: true,
+
+      /*preCaching: [
+        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;800&display=swap'
+        'https://fonts.googleapis.com/css?family=Material+Icons',
+      ],*/
+
+      // Runtime caching caches pages as we browse
+      runtimeCaching: [
+        {
+          urlPattern: '/.*',
+          handler:    'networkFirst',
+          method:     'GET',
+          strategyOptions: {
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache fonts
+        {
+          urlPattern: 'https://fonts.googleapis.com',
+          handler: 'NetworkFirst',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+        {
+          urlPattern: 'https://fonts.gstatic.com',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            /*cacheableResponse: {
+              statuses: [ 200 ],
+            },*/
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache Amazon S3
+        {
+          urlPattern: 'https://s3.amazonaws.com',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache basic API responses
+        {
+          urlPattern: process.env.LCD,
+          handler: 'NetworkFirst',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'bitsong-lcd',
+          },
+        },
+      ],
+
+      // Automatically cache for offline usage
+      offlineAssets: [
+        // Route Locations
+        /*
+        '/',
+        '/bank',
+        '/staking',
+        */
+
+        // Assets
+        '/bitsong_logo_circle_red.svg',
+        '/bitsong_logo_red.svg',
+        '/bitsong_logo.svg',
+        'https://fonts.googleapis.com/css?family=Material+Icons',
+      ],
     }
   },
 

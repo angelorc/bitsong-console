@@ -9,7 +9,8 @@ export const state = () => ({
   address_start_regex: process.env.ADDRESS_START_REGEX,
   decimals: process.env.DECIMALS,
   explorer_url: process.env.EXPLORER_URL,
-  sidebar: false
+  sidebar: false,
+  update_available: false
 })
 
 export const getters = {
@@ -42,12 +43,18 @@ export const getters = {
   },
   sidebar: state => {
     return state.sidebar
+  },
+  update_available: state => {
+    return state.update_available
   }
 }
 
 export const mutations = {
   SET_SIDEBAR: (state, payload) => {
     state.sidebar = payload
+  },
+  SET_UPDATE_AVAILABLE: (state, payload) => {
+    state.update_available = payload
   },
 }
 
