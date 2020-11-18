@@ -45,10 +45,6 @@ export default async (ctx, inject) => {
     }
   }
 
-  // check version
-  console.log('store_version', ctx.app.store.getters['settings/version'])
-  console.log('package_version', process.env.VERSION)
-
   // ctx.app.store.dispatch(`app/startListening`)
   // ctx.app.store.dispatch(`consensus/subscribe`)
   // ctx.app.store.dispatch(`validators/getAll`)

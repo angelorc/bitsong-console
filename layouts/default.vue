@@ -38,40 +38,20 @@ export default {
     // console.log('store_version', this.$store.getters['settings/version'])
     // console.log('wallet', this.$store.getters['wallet/address'])
 
-    if (this.$store.getters['settings/version'] === '0.0.0') {
-      this.$store.commit('settings/SET_VERSION', pkg.version)
+    const workbox = await window.$workbox;
+    console.log('workbox', workbox)
+    if ( workbox ) {
+      workbox.addEventListener( 'waiting', async (event) => {
+        console.log('waiting-----------------', event );
+        //await this.newVersionAvailable({ version: 'SW' });
+      });
+
+      workbox.addEventListener('installed', (event) => {
+        if (event.isUpdate) {
+          console.log('----------- update available -----------')
+        }
+      })
     }
-
-    console.log('store_version', this.$store.getters['settings/version'])
-
-    // const workbox = await window.$workbox;
-    // console.log('workbox', workbox)
-    // if ( workbox ) {
-    //   workbox.addEventListener( 'waiting', async (event) => {
-    //     console.log('waiting-----------------', event );
-    //     //await this.newVersionAvailable({ version: 'SW' });
-    //   });
-    // }
-
-    // const workbox = await window.$workbox
-    // if (workbox) {
-    //   workbox.addEventListener('installed', (event) => {
-    //     // this.$store.commit('checkInstallAvailable', false)
-    //     workbox.addEventListener('statechange', () => {
-    //       // Has network.state changed?
-    //       if (workbox.state) {
-    //         console.log('update')
-    //       }
-    //     })
-    //     // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
-    //     if (event.isUpdate) {
-    //       console.log('----------- update available -----------')
-    //       // this.newUpdateAvailable()
-    //       // whatever logic you want to use to notify the user that they need to refresh the page.
-    //       // this.$store.commit('checkUpdateAvailable', true)
-    //     }
-    //   })
-    // }
   },
 }
 </script>

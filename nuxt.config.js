@@ -142,7 +142,8 @@ export default {
       lang: 'en'
     },
     workbox: {
-      dev: process.env.WORKBOX_DEBUG,
+      //dev: process.env.WORKBOX_DEBUG,
+      enabled: true,
       config: { debug: process.env.WORKBOX_DEBUG },
 
       // importScripts: [
