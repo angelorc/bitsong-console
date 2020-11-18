@@ -61,7 +61,6 @@ export default {
 
   env: {
     WORKBOX_DEBUG: process.env.WORKBOX_DEBUG ? process.env.WORKBOX_DEBUG : false,
-    VERSION: pkg.version || '0.0.0',
     SHORT_TITLE: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Console`,
     API: process.env.API ? process.env.API : `http://localhost:3001/api/v1`,
     EXPLORER_URL: process.env.EXPLORER_URL ? process.env.EXPLORER_URL : `https://testnet.explorebitsong.com`,

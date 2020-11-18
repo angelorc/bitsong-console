@@ -44,10 +44,6 @@ export default {
     //   })
     // })
 
-    // console.log('pkg_version', pkg.version)
-    // console.log('store_version', this.$store.getters['settings/version'])
-    // console.log('wallet', this.$store.getters['wallet/address'])
-
     const workbox = await window.$workbox;
     if ( workbox ) {
       workbox.addEventListener( 'waiting', async (event) => {
