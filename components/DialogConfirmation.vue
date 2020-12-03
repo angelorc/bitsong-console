@@ -96,9 +96,7 @@
               <h3 class="font-weight-regular mt-4">Transaction Hash</h3>
               <div class="px-8 mt-2">
                 <a
-                  :href="
-                    `https://testnet.explorebitsong.com/transactions/${response.tx_hash}`
-                  "
+                  :href="`https://e-money.net/transactions/${response.tx_hash}`"
                   target="_blank"
                   >{{ response.tx_hash }}</a
                 >
@@ -123,7 +121,7 @@ export default {
       type: Boolean,
       default() {
         return false
-      }
+      },
     },
     title: String,
     response: {
@@ -132,33 +130,33 @@ export default {
         return {
           success: false,
           log: null,
-          tx_hash: null
+          tx_hash: null,
         }
-      }
+      },
     },
     memo: String,
     gas_price: {
       type: [String, Number],
       default() {
         return this.$store.getters['app/gas_price']
-      }
+      },
     },
     gas_limit: {
       type: [String, Number],
       default() {
         return this.$store.getters['app/gas_limit']
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      advanced: false
+      advanced: false,
     }
   },
   computed: {
     networkFee() {
       return this.gas_price * this.gas_limit
-    }
-  }
+    },
+  },
 }
 </script>

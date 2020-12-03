@@ -12,7 +12,7 @@
     <v-container>
       <v-row no-gutters>
         <v-col>
-          <img :src="logo" height="38" class="pt-1" />
+          <img :src="logo" height="50" class="pt-1" />
         </v-col>
       </v-row>
     </v-container>
@@ -45,8 +45,8 @@ export default {
     },
     logo() {
       return this.$vuetify.theme.dark
-        ? `/bitsong_logo.svg`
-        : `/bitsong_logo_red.svg`
+        ? `/emoney_logo_white.svg`
+        : `/emoney_logo_blue.svg`
     },
     items() {
       return [

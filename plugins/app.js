@@ -1,5 +1,3 @@
-// import Tendermint from '@/lib/tendermint'
-import Api from '@/lib/api'
 import Btsg from '@/lib/btsg'
 import Bitsong from '@/lib/bitsong'
 
@@ -17,10 +15,6 @@ export default async (ctx, inject) => {
   const btsg = new Btsg(process.env.LCD)
   inject('btsg', btsg)
   ctx.$btsg = btsg
-
-  const api = new Api(process.env.API)
-  inject('api', api)
-  ctx.$api = api
 
   // Init Bitsong Client
   const client = new BitSongClient(

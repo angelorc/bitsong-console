@@ -31,7 +31,7 @@
       ></v-text-field>
       <v-checkbox
         v-model="agreement"
-        label="I understand that BitSong will not store my password, my seed phrase, my keystore nor my private key"
+        label="I understand that Emoney will not store my password, my seed phrase, my keystore nor my private key"
         class="mt-0 pt-0"
       ></v-checkbox>
     </v-card-text>
@@ -62,14 +62,14 @@ import WalletHeader from '@/components/wallet/common/Header'
 
 export default {
   components: {
-    WalletHeader
+    WalletHeader,
   },
   data() {
     return {
       password: '',
       confirm_password: '',
       show_password: false,
-      agreement: false
+      agreement: false,
     }
   },
   methods: {
@@ -83,7 +83,7 @@ export default {
       } catch (err) {
         console.error(err)
       }
-    }
+    },
   },
   computed: {
     canContinue() {
@@ -93,7 +93,7 @@ export default {
         this.password === this.confirm_password &&
         this.agreement
       )
-    }
-  }
+    },
+  },
 }
 </script>

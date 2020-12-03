@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="pt-8 pl-4">
-      <router-link to="/" aria-label="BitSong" title="BitSong">
-        <img src="/bitsong_logo_red.svg" :width="180" />
+      <router-link to="/" aria-label="Emoney" title="Emoney">
+        <img src="/emoney_logo_blue.svg" :width="180" />
       </router-link>
     </div>
     <v-card-title class="text-h5 pt-4">{{ title }}</v-card-title>

@@ -2,7 +2,7 @@
   <v-text-field
     v-model="lazyValue"
     label="To address"
-    :hint="`es: bitsong12kr8je8lcats0c5n94xlzhu7vs7s9dvvd7devl`"
+    :hint="`es: emoney12kr8je8lcats0c5n94xlzhu7vs7s9dvvd7devl`"
     required
     clearable
     v-validate="rulesRecipient"
@@ -15,19 +15,19 @@
 <script>
 export default {
   props: {
-    value: null
+    value: null,
   },
 
   data() {
     return {
-      lazyValue: this.value
+      lazyValue: this.value,
     }
   },
 
   watch: {
     value(val) {
       this.lazyValue = val
-    }
+    },
   },
 
   beforeCreate() {
@@ -46,11 +46,11 @@ export default {
       return {
         required: true,
         //regex: this.address_start_regex,
-        regex: /^bitsong1/,
+        regex: /^emoney1/,
         max: this.address_length,
-        min: this.address_length
+        min: this.address_length,
       }
-    }
-  }
+    },
+  },
 }
 </script>

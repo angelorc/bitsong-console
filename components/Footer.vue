@@ -24,7 +24,7 @@
           <p
             class="caption"
             :class="{
-              'text-center': $vuetify.breakpoint.smAndDown,
+              'text-center': $vuetify.breakpoint.smAndDown
             }"
           >
             BitSong Explorer &copy; {{ new Date().getFullYear() }}
@@ -35,7 +35,7 @@
           md="3"
           :class="{
             'text-right': $vuetify.breakpoint.mdAndUp,
-            'text-center pt-0': $vuetify.breakpoint.smAndDown,
+            'text-center pt-0': $vuetify.breakpoint.smAndDown
           }"
         >
           <v-btn

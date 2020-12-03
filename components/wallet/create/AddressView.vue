@@ -11,7 +11,7 @@
         >Download Keystore file</v-btn
       >
       <v-btn v-if="downloaded" color="primary" @click="onContinue"
-        >Go to BitSong</v-btn
+        >Go to Console</v-btn
       >
     </v-card-actions>
   </div>
@@ -24,11 +24,11 @@ import Markup from '@/components/Markup'
 export default {
   components: {
     WalletHeader,
-    Markup
+    Markup,
   },
   data() {
     return {
-      downloaded: false
+      downloaded: false,
     }
   },
   computed: {
@@ -37,7 +37,7 @@ export default {
     },
     privateKey() {
       return this.$store.getters[`wallet/privateKey`]
-    }
+    },
   },
   methods: {
     async onDownload() {
@@ -47,7 +47,7 @@ export default {
     onContinue() {
       this.downloaded = false
       this.$emit('onContinue')
-    }
-  }
+    },
+  },
 }
 </script>

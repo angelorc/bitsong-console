@@ -4,7 +4,7 @@
     <v-card-text class="subtitle-1 grey--text text--darken-4">
       <p>To set up a wallet, you need a seed phrase.</p>
       <p>
-        No one - not a bank, family member, or BitSong - can access your crypto
+        No one - not a bank, family member, or Emoney - can access your crypto
         if it's in a wallet, unless they have the seed phrase.
       </p>
       <p>
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import WalletHeader from "@/components/wallet/common/Header";
+import WalletHeader from '@/components/wallet/common/Header'
 export default {
   components: {
-    WalletHeader
+    WalletHeader,
   },
   methods: {
     onContinue() {
-      this.$emit("onContinue");
-    }
-  }
-};
+      this.$emit('onContinue')
+    },
+  },
+}
 </script>

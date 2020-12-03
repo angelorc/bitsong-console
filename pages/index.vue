@@ -39,39 +39,12 @@
 
     <v-container class="pa-0 mb-8">
       <v-row>
-        <v-col cols="12" md="6">
-          <v-card>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">Faucet</v-list-item-title>
-                <v-list-item-subtitle class="subtitle-2"
-                  >Get faucet coin to test BitSong
-                  blockchain</v-list-item-subtitle
-                >
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn target="_blank" href="https://discord.gg/qfCRd75" icon>
-                  <v-icon>mdi-arrow-right</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-list-item>
-            <v-card-text
-              class="subtitle-1 pt-0 text--darken-3"
-              :class="{ 'grey--text text--darken-3': !$vuetify.theme.dark }"
-            >
-              Faucet tokens are free tokens that you can use in
-              {{ $store.getters[`app/chain_id`] }}.
-              <span class="font-weight-medium">Please do not abuse!</span>
-            </v-card-text>
-          </v-card>
-        </v-col>
-
         <v-col>
           <v-card height="138">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="title"
-                  >BitSong Explorer</v-list-item-title
+                  >Emoney Explorer</v-list-item-title
                 >
                 <v-list-item-subtitle class="subtitle-2"
                   >Explore your account</v-list-item-subtitle
@@ -80,9 +53,7 @@
               <v-list-item-action>
                 <v-btn
                   target="_blank"
-                  :href="
-                    `https://testnet.explorebitsong.com/account/${this.address}`
-                  "
+                  :href="`https://e-money.net/account/${this.address}`"
                   icon
                 >
                   <v-icon>mdi-arrow-right</v-icon>
@@ -93,17 +64,13 @@
               class="subtitle-1 pt-0"
               :class="{ 'grey--text text--darken-3': !$vuetify.theme.dark }"
             >
-              Use the BitSong Explorer to see your account
+              Use the Emoney Explorer to see your account
               <span class="font-weight-medium">analytics.</span>
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
-
-    <v-card v-if="false">
-      <v-card-title>Last 10 Transactions</v-card-title>
-    </v-card>
   </page-template>
 </template>
 
