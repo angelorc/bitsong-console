@@ -137,27 +137,12 @@ export default {
     async getAccount() {
       try {
         this.loading = true
-        let account = await this.$client.getAccount(this.address)
-        account = account.result.result
 
-        if (account.value && account.value.coins.length === 0) {
-          this.balance = {
-            amount: 0,
-            denom: process.env.MICROSTAKEDENOM
-          }
-        }
-
-        if (account.value && account.value.coins.length > 0) {
-          const coin = account.value.coins.find(
-            c => c.denom === process.env.MICROSTAKEDENOM
-          )
-          if (coin !== undefined) {
-            this.balance = {
-              amount: coin.amount,
-              denom: process.env.MICROSTAKEDENOM
-            }
-          }
-        }
+        let balance = await this.$client.getBalance(
+          this.address,
+          process.env.MICROSTAKEDENOM
+        )
+        this.balance = balance
 
         this.loading = false
       } catch (e) {

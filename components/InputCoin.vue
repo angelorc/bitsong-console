@@ -32,18 +32,10 @@ export default {
   },
 
   async created() {
-    let account = await this.$client.getAccount(this.address)
-    account = account.result.result
+    let balances = await this.$client.getAllBalances(this.address)
 
-    if (account.value && account.value.coins) {
-      this.coins = account.value.coins.map(c => {
-        if (c.denom.toUpperCase() === this.micro_stake_denom) {
-          return {
-            denom: this.micro_stake_denom,
-            text: this.stake_denom
-          }
-        }
-
+    if (balances) {
+      this.coins = balances.map(c => {
         return {
           denom: c.denom.toUpperCase(),
           text: convertMicroDenom(c.denom)

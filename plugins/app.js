@@ -5,6 +5,8 @@ import Bitsong from '@/lib/bitsong'
 
 import { BitSongClient } from "@bitsongofficial/js-sdk"
 
+import { StargateClient } from "@cosmjs/stargate"
+
 export default async (ctx, inject) => {
   // const tm = new Tendermint(process.env.CHAIN_ID, process.env.SOCKET)
   // inject('tm', tm)
@@ -23,23 +25,25 @@ export default async (ctx, inject) => {
   ctx.$api = api
 
   // Init Bitsong Client
-  const client = new BitSongClient(
-    process.env.LCD,
-    process.env.ADDRESS_PREFIX,
-    process.env.HD_PATH
-  )
+  // const client = new BitSongClient(
+  //   process.env.LCD,
+  //   process.env.ADDRESS_PREFIX,
+  //   process.env.HD_PATH
+  // )
+  const client = await StargateClient.connect(process.env.RPC)
   inject('client', client)
   ctx.$client = client
 
   // set mode to block
-  client.setMode("block")
+  //client.setMode("block")
+
   // init chain
-  await client.initChain()
+  //await client.initChain()
 
   // set account
   if (ctx.app.store.getters['wallet/address'] !== null) {
     try {
-      await client.setAccountInfo(ctx.app.store.getters['wallet/privateKey'])
+      //await client.setAccountInfo(ctx.app.store.getters['wallet/privateKey'])
     } catch (e) {
       console.error(e)
     }

@@ -10,10 +10,10 @@ export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
-   /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
+  /*
+  ** Nuxt target
+  ** See https://nuxtjs.org/api/configuration-target
+  */
   target: "static",
 
   /*
@@ -139,8 +139,8 @@ export default {
     },
     workbox: {
       //dev: process.env.WORKBOX_DEBUG,
-      enabled: true,
-      config: { debug: process.env.WORKBOX_DEBUG },
+      enabled: false,
+      config: { debug: false },
 
       // importScripts: [
       //   '/offline-sw.js',
@@ -165,8 +165,8 @@ export default {
       runtimeCaching: [
         {
           urlPattern: '/.*',
-          handler:    'networkFirst',
-          method:     'GET',
+          handler: 'networkFirst',
+          method: 'GET',
           strategyOptions: {
             cacheExpiration: {
               maxEntries: 10,

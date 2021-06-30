@@ -12,6 +12,7 @@
   "dependencies": {
     "@bitsongofficial/js-sdk": "https://github.com/bitsongofficial/js-sdk#v0.6.0-dev",
     "@chenfengyuan/vue-qrcode": "^1.0.2",
+    "@cosmjs/stargate": "^0.25.5",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.0.2",

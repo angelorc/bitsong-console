@@ -32,11 +32,10 @@ export default {
   },
 
   async created() {
-    let account = await this.$client.getAccount(this.address)
-    account = account.result.result
+    let balances = await this.$client.getAllBalances(this.address)
 
-    if (account.value && account.value.coins) {
-      this.balance = account.value.coins.map(c => {
+    if (balances) {
+      this.balance = balances.map(c => {
         return {
           ...c,
           text: convertMicroDenom(c.denom)
