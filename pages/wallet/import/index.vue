@@ -36,33 +36,33 @@
 </template>
 
 <script>
-import WalletImportHeader from "@/components/wallet/common/Header";
+import WalletImportHeader from '@/components/wallet/common/Header'
 
 export default {
-  layout: "auth",
+  layout: 'auth',
   components: {
     WalletImportHeader
   },
   data() {
     return {
       methods: [
+        // {
+        //   icon: "mdi-file-key-outline",
+        //   label: "Keystore file",
+        //   to: "/wallet/import/keystore"
+        // },
         {
-          icon: "mdi-file-key-outline",
-          label: "Keystore file",
-          to: "/wallet/import/keystore"
+          icon: 'mdi-shield-key-outline',
+          label: 'Mnemonic phrase',
+          to: '/wallet/import/mnemonic'
         },
         {
-          icon: "mdi-shield-key-outline",
-          label: "Mnemonic phrase",
-          to: "/wallet/import/mnemonic"
-        },
-        {
-          icon: "mdi-key-outline",
-          label: "Private key",
-          to: "/wallet/import/privatekey"
+          icon: 'mdi-key-outline',
+          label: 'Private key',
+          to: '/wallet/import/privatekey'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
