@@ -80,9 +80,7 @@
               <v-list-item-action>
                 <v-btn
                   target="_blank"
-                  :href="
-                    `https://testnet.explorebitsong.com/account/${this.address}`
-                  "
+                  :href="`https://explorebitsong.com/account/${this.address}`"
                   icon
                 >
                   <v-icon>mdi-arrow-right</v-icon>

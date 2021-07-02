@@ -10,10 +10,10 @@ export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
-   /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
+  /*
+  ** Nuxt target
+  ** See https://nuxtjs.org/api/configuration-target
+  */
   target: "static",
 
   /*
@@ -63,7 +63,7 @@ export default {
     WORKBOX_DEBUG: process.env.WORKBOX_DEBUG ? process.env.WORKBOX_DEBUG : false,
     SHORT_TITLE: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Console`,
     API: process.env.API ? process.env.API : `http://localhost:3001/api/v1`,
-    EXPLORER_URL: process.env.EXPLORER_URL ? process.env.EXPLORER_URL : `https://testnet.explorebitsong.com`,
+    EXPLORER_URL: process.env.EXPLORER_URL ? process.env.EXPLORER_URL : `https://explorebitsong.com`,
 
     GA_ID: process.env.GA_ID ? process.env.GA_ID : ``,
     SEO_TITLE: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong (BTSG) Blockchain Console`,
@@ -79,12 +79,12 @@ export default {
     RPC: process.env.RPC ? process.env.RPC : `http://localhost:26657`,
     SOCKET: process.env.SOCKET ? process.env.SOCKET : `http://localhost:26657/websocket`,
     CHAIN_ID: process.env.CHAIN_ID ? process.env.CHAIN_ID : `bitsong-localnet`,
-    DEFAULT_GAS_PRICE: process.env.DEFAULT_GAS_PRICE ? process.env.DEFAULT_GAS_PRICE : 0.25,
+    DEFAULT_GAS_PRICE: process.env.DEFAULT_GAS_PRICE ? process.env.DEFAULT_GAS_PRICE : 0.025,
     DEFAULT_GAS_LIMIT: process.env.DEFAULT_GAS_LIMIT ? process.env.DEFAULT_GAS_LIMIT : 200000,
     ADDRESS_PREFIX: process.env.ADDRESS_PREFIX ? process.env.ADDRESS_PREFIX : `bitsong`,
     ADDRESS_LENGTH: process.env.ADDRESS_LENGTH ? process.env.ADDRESS_LENGTH : 46,
     ADDRESS_START_REGEX: process.env.ADDRESS_START_REGEX ? process.env.ADDRESS_START_REGEX : /^bitsong1/,
-    HD_PATH: process.env.HD_PATH ? process.env.HD_PATH : `44'/118'/0'/0/`,
+    HD_PATH: process.env.HD_PATH ? process.env.HD_PATH : `44'/639'/0'/0/`,
     DECIMALS: process.env.DECIMALS ? process.env.DECIMALS : 6,
     SIGN_MODE_TYPE: process.env.SIGN_MODE_TYPE ? process.env.SIGN_MODE_TYPE : 'block'
   },
@@ -165,8 +165,8 @@ export default {
       runtimeCaching: [
         {
           urlPattern: '/.*',
-          handler:    'networkFirst',
-          method:     'GET',
+          handler: 'networkFirst',
+          method: 'GET',
           strategyOptions: {
             cacheExpiration: {
               maxEntries: 10,

@@ -97,7 +97,7 @@
               <div class="px-8 mt-2">
                 <a
                   :href="
-                    `https://testnet.explorebitsong.com/transactions/${response.tx_hash}`
+                    `https://explorebitsong.com/transactions/${response.tx_hash}`
                   "
                   target="_blank"
                   >{{ response.tx_hash }}</a
