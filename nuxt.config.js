@@ -163,18 +163,18 @@ export default {
 
       // Runtime caching caches pages as we browse
       runtimeCaching: [
-        {
-          urlPattern: '/.*',
-          handler: 'networkFirst',
-          method: 'GET',
-          strategyOptions: {
-            cacheExpiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
-              purgeOnQuotaError: true,
-            }
-          },
-        },
+        // {
+        //   urlPattern: '/.*',
+        //   handler: 'networkFirst',
+        //   method: 'GET',
+        //   strategyOptions: {
+        //     cacheExpiration: {
+        //       maxEntries: 10,
+        //       maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
+        //       purgeOnQuotaError: true,
+        //     }
+        //   },
+        // },
 
         // Cache fonts
         {
@@ -223,14 +223,14 @@ export default {
         },
 
         // Cache basic API responses
-        {
-          urlPattern: process.env.LCD,
-          handler: 'NetworkFirst',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'bitsong-lcd',
-          },
-        },
+        // {
+        //   urlPattern: process.env.LCD,
+        //   handler: 'NetworkFirst',
+        //   method: 'GET',
+        //   strategyOptions: {
+        //     cacheName: 'bitsong-lcd',
+        //   },
+        // },
       ],
 
       // Automatically cache for offline usage
