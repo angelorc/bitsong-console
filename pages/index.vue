@@ -39,7 +39,7 @@
 
     <v-container class="pa-0 mb-8">
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="6" v-if="false">
           <v-card>
             <v-list-item>
               <v-list-item-content>
